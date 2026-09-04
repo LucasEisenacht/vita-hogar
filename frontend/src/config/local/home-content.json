@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "badge": "Nuevo en W.todocell",
+    "desktopImageUrl": "",
+    "isActive": true,
+    "mobileImageUrl": "",
+    "primaryCtaHref": "/tienda",
+    "primaryCtaLabel": "Comprar ahora",
+    "secondaryCtaHref": "/tienda",
+    "secondaryCtaLabel": "Ver coleccion",
+    "subtitle": "Tecnologia elegida con una mirada suave, moderna y personal.",
+    "title": "Accesorios que combinan con tu estilo."
+  },
+  "featuredCategories": {
+    "items": [
+      {
+        "description": "Fundas seleccionadas para proteger y acompanar tu estilo.",
+        "isActive": true,
+        "name": "Fundas",
+        "order": 1,
+        "slug": "fundas"
+      },
+      {
+        "description": "Accesorios de tecnologia para uso cotidiano.",
+        "isActive": true,
+        "name": "Accesorios",
+        "order": 2,
+        "slug": "accesorios"
+      },
+      {
+        "description": "Combos preparados como productos comunes del catalogo.",
+        "isActive": true,
+        "name": "Combos",
+        "order": 3,
+        "slug": "combos"
+      },
+      {
+        "description": "Celulares nuevos, usados y reacondicionados seleccionados.",
+        "isActive": true,
+        "name": "Celulares",
+        "order": 4,
+        "slug": "celulares"
+      },
+      {
+        "description": "Consolas y tecnologia para entretenimiento.",
+        "isActive": true,
+        "name": "Consolas",
+        "order": 5,
+        "slug": "consolas"
+      }
+    ],
+    "subtitle": "Accesorios pensados para acompanarte todos los dias.",
+    "title": "Encontra tu estilo"
+  },
+  "featuredProducts": {
+    "ctaHref": "/tienda",
+    "ctaLabel": "Ver todos",
+    "isActive": true,
+    "limit": 6,
+    "sort": "featured",
+    "subtitle": "Productos marcados como destacados desde el panel.",
+    "title": "Productos destacados"
+  },
+  "benefits": {
+    "items": [
+      {
+        "description": "Seleccionamos cada producto pensando en diseno, calidad y uso cotidiano.",
+        "icon": "sparkle",
+        "isActive": true,
+        "order": 1,
+        "title": "Elegidos con criterio"
+      },
+      {
+        "description": "Cada pedido se arma con atencion en cada detalle.",
+        "icon": "care",
+        "isActive": true,
+        "order": 2,
+        "title": "Preparados con cuidado"
+      },
+      {
+        "description": "Recibi tus productos estes donde estes.",
+        "icon": "send",
+        "isActive": true,
+        "order": 3,
+        "title": "Envios a todo el pais"
+      }
+    ],
+    "title": "Comprar en W.todocell"
+  },
+  "instagram": {
+    "buttonHref": "https://www.instagram.com/w.todocell/",
+    "buttonLabel": "Ir a @w.todocell",
+    "isActive": true,
+    "text": "Descubri nuevos ingresos, ideas y accesorios en @w.todocell.",
+    "title": "Seguinos en Instagram",
+    "username": "@w.todocell"
+  }
+}
