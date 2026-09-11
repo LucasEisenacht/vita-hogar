@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getNavigationCategories } from "@/config/catalog-navigation";
 import type { PublicCategory, PublicProduct } from "@/lib/catalog/types";
-import { getCatalogCategoryHref } from "@/lib/catalog/routes";
 import { getCatalogSearchUrl } from "@/lib/catalog/search";
 import { SearchResultItem } from "@/components/search/search-result-item";
 
@@ -50,14 +48,14 @@ const searchCollections = [
   { href: "/tienda?orden=newest", label: "Novedades" },
   { href: "/tienda?orden=featured", label: "Destacados" },
   { href: "/tienda?disponibilidad=in_stock", label: "En stock" },
-  { href: "/tienda/combos", label: "Combos" },
+  { href: "/tienda", label: "Living" },
 ];
 
 const popularSearches = [
-  { href: "/buscar?q=iPhone", label: "iPhone" },
-  { href: "/buscar?q=Samsung", label: "Samsung" },
-  { href: "/buscar?q=pop socket", label: "Pop Socket" },
-  { href: "/buscar?q=gaming", label: "Gaming" },
+  { href: "/buscar?q=mantas", label: "Mantas" },
+  { href: "/buscar?q=almohadones", label: "Almohadones" },
+  { href: "/buscar?q=velas", label: "Velas" },
+  { href: "/buscar?q=toallas", label: "Toallas" },
 ];
 
 export function SearchResults({
@@ -71,11 +69,11 @@ export function SearchResults({
   selectedIndex,
   setSelectedIndex,
 }: SearchResultsProps) {
-  const navigationCategories = getNavigationCategories(categories);
+  const navigationCategories = categories;
 
   if (query.length < 2) {
     return (
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(240px,0.65fr)]">
+      <div className="vita-search-results grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(240px,0.65fr)]">
         <section className="rounded-[28px] border border-white/58 bg-white/36 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.58)] backdrop-blur-sm sm:p-5">
           <div className="mb-4 space-y-1">
             <p className="font-display text-lg font-semibold text-foreground">
@@ -90,7 +88,7 @@ export function SearchResults({
               {navigationCategories.slice(0, 6).map((category) => (
                 <Link
                   className="group flex min-h-12 items-center justify-between rounded-[18px] border border-white/58 bg-white/42 px-4 py-2.5 text-sm font-semibold text-foreground transition-all duration-[250ms] hover:-translate-y-0.5 hover:border-primary/38 hover:bg-white/68 hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-                  href={getCatalogCategoryHref(category.slug)}
+                  href="/tienda"
                   key={category.slug}
                   onClick={onClose}
                 >
@@ -149,7 +147,7 @@ export function SearchResults({
     return (
       <div
         aria-live="polite"
-        className="flex items-center gap-3 rounded-[24px] border border-white/58 bg-white/38 p-5 text-sm font-semibold text-muted-foreground backdrop-blur-sm"
+        className="vita-search-results flex items-center gap-3 border border-border bg-background p-5 text-sm font-semibold text-muted-foreground"
       >
         <SpinnerIcon />
         Buscando...
@@ -161,7 +159,7 @@ export function SearchResults({
     return (
       <div
         aria-live="polite"
-        className="rounded-[24px] border border-white/58 bg-white/38 p-5 backdrop-blur-sm"
+        className="vita-search-results border border-border bg-background p-5"
       >
         <p className="font-display text-lg font-semibold text-foreground">
           No pudimos realizar la b&uacute;squeda. Intent&aacute; nuevamente.
@@ -174,7 +172,7 @@ export function SearchResults({
     return (
       <div
         aria-live="polite"
-        className="space-y-4 rounded-[24px] border border-white/58 bg-white/38 p-5 backdrop-blur-sm"
+        className="vita-search-results space-y-4 border border-border bg-background p-5"
       >
         <div className="space-y-2">
           <p className="font-display text-lg font-semibold text-foreground">
@@ -196,7 +194,7 @@ export function SearchResults({
   }
 
   return (
-    <div className="space-y-4" role="listbox">
+    <div className="vita-search-results space-y-4" role="listbox">
       <div className="grid max-h-[min(56vh,520px)] gap-2 overflow-y-auto pr-1">
         {products.map((product, index) => (
           <SearchResultItem

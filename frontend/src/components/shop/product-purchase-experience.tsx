@@ -67,7 +67,7 @@ export function ProductPurchaseExperience({
   }
 
   return (
-    <section className="grid gap-7 lg:grid-cols-[minmax(0,1.18fr)_minmax(390px,0.82fr)] lg:items-start xl:gap-10">
+    <section className="grid gap-8 lg:grid-cols-2 lg:items-start xl:gap-12">
       <ProductGallery
         images={selectedVariant?.images}
         onSelectedImageChange={handleImageChange}

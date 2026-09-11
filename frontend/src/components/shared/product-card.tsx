@@ -37,15 +37,15 @@ export function ProductCard({
 
   return (
     <Card
-      className="wt-card-hover-spark group relative flex h-full overflow-hidden rounded-[24px] border-white/56 bg-[linear-gradient(180deg,rgba(255,253,251,0.96)_0%,rgba(253,238,243,0.4)_100%)] p-2 shadow-[0_14px_38px_rgba(74,55,47,0.055)] transition-all duration-[340ms] ease-out hover:-translate-y-1 hover:border-primary/22 hover:shadow-[0_22px_58px_rgba(74,55,47,0.095)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:p-2.5"
+      className="vita-product-card group relative flex h-full overflow-hidden border-0 bg-transparent p-0 shadow-none"
     >
       <Link
         aria-label={`Ver detalles de ${product.name}`}
-        className="absolute inset-0 z-10 rounded-[24px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         href={productHref}
       />
       <CardContent className="flex h-full flex-1 flex-col p-0">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[20px] bg-[linear-gradient(135deg,var(--surface-soft),var(--surface))]">
+        <div className="relative aspect-[4/5] overflow-hidden bg-background-alt">
           {image?.url ? (
             <>
               <Image
@@ -79,7 +79,7 @@ export function ProductCard({
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_56%,rgba(74,55,47,0.1)_100%)] opacity-0 transition-opacity duration-[250ms] group-hover:opacity-100 motion-reduce:transition-none" />
           <div className="absolute right-2 top-2 z-20 opacity-55 transition-opacity duration-[250ms] group-hover:opacity-100 focus-within:opacity-100 sm:right-2.5 sm:top-2.5">
             <FavoriteButton
-              className="h-9 w-9 border border-white/58 bg-white/58 text-foreground shadow-[0_8px_20px_rgba(74,55,47,0.07)] backdrop-blur-md hover:bg-white/86"
+              className="h-10 w-10 border border-border bg-surface text-foreground shadow-none hover:border-[var(--accent-secondary)] hover:text-[var(--accent-secondary)]"
               initialIsFavorite={initialIsFavorite}
               productId={product.id}
               productSlug={product.slug}
@@ -94,7 +94,7 @@ export function ProductCard({
             <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
               {product.categoryLabel}
             </p>
-            <h3 className="line-clamp-2 min-h-[2.72rem] font-display text-[0.98rem] font-semibold leading-snug text-foreground transition-colors duration-[220ms] group-hover:text-primary-hover sm:text-[1.05rem]">
+            <h3 className="line-clamp-2 min-h-[2.72rem] font-display text-[0.98rem] font-semibold leading-snug text-foreground transition-colors duration-[220ms] group-hover:text-primary sm:text-[1.05rem]">
               {product.name}
             </h3>
             {variantSummary ? (

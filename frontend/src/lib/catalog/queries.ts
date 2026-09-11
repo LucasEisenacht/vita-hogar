@@ -1,4 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
+import { isSupabaseDemoMode } from "@/lib/supabase/env";
+import { demoCatalogCategories, demoCatalogProducts } from "@/lib/catalog/demo-catalog";
 import { normalizeCategory, normalizeProduct } from "@/lib/catalog/normalize";
 import { getCatalogCategoryRouteSlugs } from "@/config/catalog-category-routing";
 import {
@@ -450,6 +452,10 @@ async function addCategorySearchCandidates({
 }
 
 export async function getPublicCategories(): Promise<Array<PublicCategory>> {
+  if (isSupabaseDemoMode()) {
+    return demoCatalogCategories;
+  }
+
   const categories = await getActiveCategoryRows();
 
   return categories.map(normalizeCategory);
@@ -458,6 +464,14 @@ export async function getPublicCategories(): Promise<Array<PublicCategory>> {
 export async function getPublicProducts(
   options: CatalogProductFilters = {},
 ): Promise<Array<PublicProduct>> {
+  if (isSupabaseDemoMode()) {
+    const categoryProducts = options.categorySlug
+      ? demoCatalogProducts.filter((product) => product.category === options.categorySlug)
+      : demoCatalogProducts;
+    const sortedProducts = sortProducts(filterProducts(categoryProducts, options), options.sort);
+    return typeof options.limit === "number" ? sortedProducts.slice(0, options.limit) : sortedProducts;
+  }
+
   const categories = await getActiveCategoryRows();
   const selectedCategorySlugs = options.categorySlug
     ? getCatalogCategoryRouteSlugs(options.categorySlug)
@@ -640,6 +654,12 @@ export async function searchPublicProducts(query: string, limit = 6) {
     return [];
   }
 
+  if (isSupabaseDemoMode()) {
+    const normalizedQuery = normalizeComparableText(sanitizedQuery);
+    return sortSearchProducts(demoCatalogProducts, sanitizedQuery)
+      .filter((product) => normalizeComparableText(`${product.name} ${product.categoryLabel} ${product.shortDescription}`).includes(normalizedQuery))
+      .slice(0, resultLimit);
+  }
   const categories = await getActiveCategoryRows();
   const normalizedQuery = normalizeComparableText(sanitizedQuery);
   const matchingCategoryIds = categories

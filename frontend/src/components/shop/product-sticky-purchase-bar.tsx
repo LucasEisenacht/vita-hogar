@@ -46,7 +46,7 @@ export function ProductStickyPurchaseBar({
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-white/55 bg-[#fff6f8]/82 px-4 py-3 shadow-[0_-18px_48px_rgba(74,55,47,0.10)] backdrop-blur-xl transition-transform duration-[250ms] motion-reduce:transition-none lg:bottom-5 lg:left-1/2 lg:right-auto lg:w-[min(940px,calc(100vw-48px))] lg:-translate-x-1/2 lg:rounded-full lg:border lg:px-5 ${
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface px-4 py-3 shadow-[0_-12px_32px_rgba(46,41,36,0.08)] transition-transform duration-[250ms] motion-reduce:transition-none lg:bottom-5 lg:left-1/2 lg:right-auto lg:w-[min(940px,calc(100vw-48px))] lg:-translate-x-1/2 lg:rounded-lg lg:border lg:px-5 ${
         isVisible
           ? "translate-y-0"
           : "translate-y-[calc(100%+env(safe-area-inset-bottom)+24px)] lg:translate-y-[calc(100%+32px)]"

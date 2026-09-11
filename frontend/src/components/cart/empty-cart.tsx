@@ -6,7 +6,7 @@ export function EmptyCart() {
       <EmptyState
         actionHref="/tienda"
         actionLabel="Explorar la tienda"
-        message="Descubri accesorios, celulares y tecnologia elegidos para acompanarte todos los dias."
+        message="Descubrí textiles, objetos y detalles pensados para acompañar cada ambiente."
         title="Tu carrito esta esperando"
       />
     </div>

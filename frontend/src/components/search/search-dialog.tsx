@@ -225,7 +225,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
       className="px-0 py-0 sm:px-6 sm:py-16 lg:py-24"
       labelledBy="catalog-search-title"
       onClose={closeSearch}
-      panelClassName="mx-auto flex min-h-dvh w-full max-w-[920px] flex-col overflow-hidden bg-[rgba(255,250,248,0.9)] p-5 sm:min-h-0 sm:rounded-[38px] sm:p-7"
+      panelClassName="vita-search-panel mx-auto flex min-h-dvh w-full max-w-[920px] flex-col overflow-hidden bg-surface p-5 sm:min-h-0 sm:p-7"
     >
       <section
         className="flex min-h-0 flex-1 flex-col"
@@ -242,7 +242,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
               &iquest;Qu&eacute; est&aacute;s buscando?
             </p>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Accesorios, modelos, categor&iacute;as y favoritos de temporada.
+              Textiles, objetos y detalles para cada ambiente.
             </p>
           </div>
           <Button
@@ -262,11 +262,11 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
           </label>
           <input
             autoComplete="off"
-            className="h-16 w-full rounded-full border border-white/62 bg-white/58 px-6 font-display text-xl font-semibold text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.72),0_12px_34px_rgba(74,55,47,0.055)] outline-none transition-all duration-[250ms] placeholder:text-muted-foreground/58 focus:border-primary/58 focus:bg-white/76 focus:ring-4 focus:ring-ring/25"
+            className="vita-search-input h-16 w-full rounded-none border border-border bg-surface px-6 font-display text-xl font-semibold text-foreground shadow-none outline-none transition-all duration-[250ms] placeholder:text-muted-foreground/58 focus:border-primary/58 focus:bg-white/76 focus:ring-4 focus:ring-ring/25"
             id="catalog-search-input"
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={handleInputKeyDown}
-            placeholder="Buscar fundas, iPhone, audio..."
+            placeholder="Buscar manta, almohadón, vela, canasto..."
             ref={inputRef}
             type="search"
             value={query}

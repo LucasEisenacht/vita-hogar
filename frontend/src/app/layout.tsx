@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Newsreader, Source_Sans_3 } from "next/font/google";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
@@ -15,20 +15,20 @@ import {
 import { createClient } from "@/lib/supabase/server";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
   display: "swap",
 });
 
-const metadataTitle = `${siteConfig.name} | Accesorios que combinan con tu estilo`;
-const metadataDescription = `Accesorios para celulares y tecnologia elegidos con una mirada suave, moderna y personal. ${siteConfig.coverage} desde ${siteConfig.location.city}.`;
+const metadataTitle = `${siteConfig.name} | Hogar, blanquería y deco`;
+const metadataDescription = `Una selección cálida para habitar, cuidar y disfrutar tu casa. ${siteConfig.coverage} desde ${siteConfig.location.city}.`;
 
 export const metadata: Metadata = {
   ...createPublicMetadata({
@@ -52,8 +52,9 @@ export default async function RootLayout({
 
   return (
     <html
+      data-scroll-behavior="smooth"
       lang="es"
-      className={`${inter.variable} ${manrope.variable} h-full antialiased`}
+      className={`${sourceSans.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <Providers>

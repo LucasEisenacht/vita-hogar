@@ -152,11 +152,11 @@ export function MiniCart() {
       <aside
         aria-label="Mini carrito de compras"
         aria-modal="true"
-        className="ml-auto flex h-dvh w-full max-w-[460px] flex-col overflow-hidden border-l border-white/58 bg-[rgba(255,250,248,0.94)] shadow-[0_24px_80px_rgba(74,55,47,0.18)] backdrop-blur-[20px] animate-[wtodocell-mini-cart-panel_320ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none sm:w-[min(460px,calc(100vw-2rem))]"
+        className="vita-mini-cart ml-auto flex h-dvh w-full max-w-[460px] flex-col overflow-hidden border-l border-border bg-surface shadow-[0_16px_36px_rgba(46,41,36,0.12)] animate-[wtodocell-mini-cart-panel_320ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none sm:w-[min(460px,calc(100vw-2rem))]"
         ref={panelRef}
         role="dialog"
       >
-        <header className="shrink-0 border-b border-white/58 px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6">
+        <header className="shrink-0 border-b border-border px-5 pb-4 pt-[max(1.25rem,env(safe-area-inset-top))] sm:px-6">
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="font-display text-2xl font-semibold text-foreground">
@@ -168,7 +168,7 @@ export function MiniCart() {
             </div>
             <button
               aria-label="Cerrar mini carrito"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/58 bg-white/48 text-foreground transition-colors duration-[220ms] hover:bg-white/72 hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-none border border-border bg-surface text-foreground transition-colors duration-[220ms] hover:bg-white/72 hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               onClick={closeMiniCart}
               type="button"
             >
@@ -176,7 +176,7 @@ export function MiniCart() {
             </button>
           </div>
           {lastAddedLineId ? (
-            <p className="mt-4 inline-flex rounded-full border border-primary/22 bg-secondary/44 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-hover animate-[wtodocell-mini-cart-confirm_240ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none">
+            <p className="mt-4 inline-flex border border-primary/22 bg-background-alt px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-primary-hover animate-[wtodocell-mini-cart-confirm_240ms_cubic-bezier(0.16,1,0.3,1)_both] motion-reduce:animate-none">
               Agregado al carrito
             </p>
           ) : null}
@@ -207,7 +207,7 @@ export function MiniCart() {
               />
             </div>
           ) : (
-            <div className="flex min-h-[55vh] flex-col items-center justify-center rounded-[32px] border border-white/58 bg-white/34 px-6 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.62)]">
+            <div className="flex min-h-[55vh] flex-col items-center justify-center border border-border bg-background px-6 text-center">
               <div className="mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-secondary/50">
                 <EmptyCartMark />
               </div>
@@ -215,7 +215,7 @@ export function MiniCart() {
                 Tu carrito esta vacio
               </h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                Explora accesorios y tecnologia elegidos para acompanar tu estilo.
+                Explorá textiles, objetos y detalles elegidos para acompañar tu casa.
               </p>
               <Link
                 className={buttonStyles({
@@ -231,7 +231,7 @@ export function MiniCart() {
           )}
         </div>
 
-        <footer className="shrink-0 border-t border-white/60 bg-[rgba(255,250,248,0.86)] px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 shadow-[0_-16px_42px_rgba(74,55,47,0.06)] backdrop-blur-[18px] sm:px-6">
+        <footer className="shrink-0 border-t border-border bg-surface px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:px-6">
           <div className="mb-4 flex items-end justify-between gap-4">
             <span className="text-sm font-semibold text-muted-foreground">
               Subtotal

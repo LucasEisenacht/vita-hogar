@@ -41,7 +41,7 @@ export async function generateMetadata({
 
   if (!product) {
     return {
-      title: "Producto no encontrado | W.todocell",
+      title: "Producto no encontrado | VITA HOGAR",
       robots: {
         follow: false,
         index: false,
@@ -53,7 +53,7 @@ export async function generateMetadata({
     description: product.shortDescription || product.description,
     image: product.primaryImage?.url,
     path: `/producto/${product.slug}`,
-    title: `${product.name} | W.todocell`,
+    title: `${product.name} | VITA HOGAR`,
   });
 }
 
@@ -91,7 +91,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         dangerouslySetInnerHTML={createJsonLdScript(createProductJsonLd(product))}
         type="application/ld+json"
       />
-      <div className="pb-24 pt-7 text-foreground sm:pt-10 lg:pb-28 lg:pt-12">
+      <div className="vita-product-page pb-24 pt-7 text-foreground sm:pt-10 lg:pb-28 lg:pt-12">
       <Container className="max-w-[1400px] space-y-12 lg:space-y-16">
         <nav
           aria-label="Breadcrumb"

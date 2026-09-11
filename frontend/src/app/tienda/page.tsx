@@ -25,9 +25,9 @@ import { EditorialProductGrid } from "@/components/shop/editorial-product-grid";
 export const metadata: Metadata = {
   ...createPublicMetadata({
     description:
-      "Explora accesorios de tecnologia seleccionados con una mirada suave, moderna y personal.",
+      "Objetos y textiles seleccionados para habitar mejor.",
     path: "/tienda",
-    title: "Tienda | W.todocell",
+    title: "Tienda | VITA HOGAR",
   }),
 };
 

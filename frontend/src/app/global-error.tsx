@@ -13,14 +13,14 @@ export default function GlobalError({ reset }: GlobalErrorProps) {
         <main className="flex min-h-screen items-center justify-center px-5 py-12">
           <section className="max-w-xl text-center">
             <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
-              W.todocell
+              VITA HOGAR
             </p>
             <h1 className="mt-4 font-display text-4xl font-semibold leading-tight">
-              Necesitamos recargar esta experiencia
+              Necesitamos recargar este espacio
             </h1>
             <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-              Hubo un problema inesperado. No mostramos detalles tecnicos para
-              proteger la sesion.
+              Hubo un problema inesperado. Probá nuevamente para seguir
+              recorriendo la tienda.
             </p>
             <button className={buttonStyles({ className: "mt-7" })} onClick={reset}>
               Reintentar

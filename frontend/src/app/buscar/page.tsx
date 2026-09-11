@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getNavigationCategories } from "@/config/catalog-navigation";
 import {
   getPublicCategories,
   searchPublicProducts,
 } from "@/lib/catalog/queries";
 import { getCurrentUserFavoriteIds } from "@/lib/favorites/queries";
-import { getCatalogCategoryHref } from "@/lib/catalog/routes";
 import {
   isSearchableCatalogQuery,
   sanitizeCatalogSearchQuery,
@@ -35,9 +33,9 @@ export async function generateMetadata({
     return {
       ...createPublicMetadata({
         description:
-          "Busca productos, modelos y categorias disponibles en W.todocell.",
+          "Textiles, objetos y detalles para cada ambiente.",
         path: "/buscar",
-        title: "Buscar | W.todocell",
+        title: "Buscar | VITA HOGAR",
       }),
       robots: {
         follow: true,
@@ -48,9 +46,9 @@ export async function generateMetadata({
 
   return {
     ...createPublicMetadata({
-      description: `Resultados de busqueda para ${query} en W.todocell.`,
+      description: `Resultados de búsqueda para ${query} en VITA HOGAR.`,
       path: `/buscar?q=${encodeURIComponent(query)}`,
-      title: `Resultados para ${query} | W.todocell`,
+      title: `Resultados para ${query} | VITA HOGAR`,
     }),
     robots: {
       follow: true,
@@ -78,20 +76,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   } catch {
     searchFailed = true;
   }
-  const navigationCategories = getNavigationCategories(categories);
+  const navigationCategories = categories;
   const title = query
     ? `Resultados para '${query}'`
-    : "Busca productos, modelos o categorias";
+    : "¿Qué estás buscando?";
 
   return (
     <StorefrontPageShell>
-      <section className="bg-transparent py-8 sm:py-10">
+      <section className="vita-search-page bg-transparent py-8 sm:py-10">
         <Container className="max-w-[1320px] space-y-6">
-          <div className="storefront-panel relative overflow-hidden rounded-[28px] px-5 py-6 sm:px-6 lg:px-8">
-            <span
-              aria-hidden="true"
-              className="wt-glow-dot right-10 top-10 h-3 w-3 [animation-delay:2s]"
-            />
+          <div className="vita-search-page__intro relative overflow-hidden border border-border bg-surface px-5 py-6 sm:px-6 lg:px-8">
             <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
               Buscar
             </p>
@@ -99,11 +93,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               {title}
             </h1>
             <p className="text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-              Encontr&aacute; accesorios, modelos compatibles y categor&iacute;as
-              activas del cat&aacute;logo.
+              Encontr&aacute; textiles, objetos y detalles para los distintos ambientes de la casa.
             </p>
             {canSearch ? (
-              <p className="mt-3 inline-flex rounded-full border border-white/52 bg-white/34 px-3.5 py-1.5 text-sm font-semibold text-muted-foreground backdrop-blur-sm">
+              <p className="mt-3 inline-flex border border-border bg-background-alt px-3.5 py-1.5 text-sm font-semibold text-muted-foreground">
                 {products.length} productos encontrados
               </p>
             ) : null}
@@ -111,19 +104,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
           <form
             action="/buscar"
-            className="storefront-panel-strong grid gap-3 rounded-[24px] p-3 sm:grid-cols-[minmax(0,1fr)_auto]"
+            className="vita-search-page__form grid gap-3 border border-border bg-surface p-3 sm:grid-cols-[minmax(0,1fr)_auto]"
           >
             <label className="sr-only" htmlFor="search-page-input">
               Buscar productos
             </label>
             <input
               autoComplete="off"
-              className="h-11 rounded-full border border-white/52 bg-white/48 px-4 font-display text-base font-semibold text-foreground outline-none backdrop-blur-sm transition-all duration-[250ms] placeholder:text-muted-foreground/65 focus:border-primary focus:ring-4 focus:ring-ring/25"
+              className="h-11 border border-border bg-surface px-4 font-display text-base font-semibold text-foreground outline-none transition-colors duration-[200ms] placeholder:text-muted-foreground/65 focus:border-primary focus:ring-2 focus:ring-ring/25"
               defaultValue={query}
               id="search-page-input"
               maxLength={100}
               name="q"
-              placeholder="Buscar fundas, iPhone, audio..."
+              placeholder="Buscar manta, almohadón, vela, canasto..."
               type="search"
             />
             <Button className="w-full sm:w-auto" type="submit">
@@ -135,8 +128,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             <div className="flex flex-wrap gap-2">
               {navigationCategories.map((category) => (
                 <Link
-                  className="rounded-full border border-white/50 bg-white/30 px-3.5 py-1.5 text-sm font-semibold text-muted-foreground backdrop-blur-sm transition-all duration-[250ms] hover:-translate-y-0.5 hover:border-primary/45 hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-                  href={getCatalogCategoryHref(category.slug)}
+                  className="border border-border bg-surface px-3.5 py-1.5 text-sm font-semibold text-muted-foreground transition-colors duration-[200ms] hover:border-primary hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  href="/tienda"
                   key={category.slug}
                 >
                   {category.name}
@@ -162,8 +155,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 Empez&aacute; con una b&uacute;squeda
               </h2>
               <p className="text-sm leading-6 text-muted-foreground">
-                Pod&eacute;s buscar por producto, categor&iacute;a, color o modelo
-                compatible.
+                Pod&eacute;s buscar por producto, categoría, material o ambiente.
               </p>
             </CardContent>
           </Card>
@@ -183,7 +175,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <EmptyCatalog
             actionHref="/tienda"
             actionLabel="Ver todos los productos"
-            message="Proba con otro nombre, categoria o modelo."
+            message="Probá con otro nombre, categoría, material o ambiente."
             title={`No encontramos productos para '${query}'`}
           />
         )}

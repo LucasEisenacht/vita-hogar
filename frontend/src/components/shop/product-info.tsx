@@ -41,8 +41,8 @@ export function ProductInfo({
   const installmentPrice = Math.ceil(displayPrice / 3);
 
   return (
-    <Card className="storefront-panel-strong rounded-[34px] shadow-[0_14px_38px_rgba(74,55,47,0.035)]">
-      <CardContent className="space-y-8 p-5 sm:p-7 lg:p-8">
+    <Card className="border-0 bg-transparent shadow-none">
+      <CardContent className="space-y-8 p-0">
         <div className="space-y-5">
           <div className="space-y-4">
             <ProductCommercialBadges compact maxItems={2} product={product} />
@@ -59,8 +59,8 @@ export function ProductInfo({
             </h1>
             <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-muted-foreground">
               <span
-                aria-label="Rating preparado"
-                className="flex items-center gap-1 text-primary-hover"
+                aria-label="Selección VITA HOGAR"
+                className="flex items-center gap-1 text-[var(--accent-secondary)]"
               >
                 {[0, 1, 2, 3, 4].map((star) => (
                   <svg
@@ -73,7 +73,7 @@ export function ProductInfo({
                   </svg>
                 ))}
               </span>
-              <span>Opiniones en preparacion</span>
+              <span>Cuidado en cada detalle</span>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export function ProductInfo({
           </div>
         </div>
 
-        <div className="grid gap-3 rounded-[24px] border border-white/48 bg-white/22 p-4 text-sm backdrop-blur-sm sm:grid-cols-2">
+        <div className="grid gap-4 border-y border-border bg-surface py-4 text-sm sm:grid-cols-2">
           <div>
             <p className="text-muted-foreground">Categoria</p>
             <p className="mt-1 font-semibold text-foreground">
@@ -147,7 +147,7 @@ export function ProductInfo({
         </div>
 
         {isMadeToOrder(product) ? (
-          <div className="rounded-[24px] border border-primary/20 bg-secondary/50 p-4 text-sm leading-6 text-primary-hover backdrop-blur-sm">
+          <div className="border-l-2 border-[var(--accent-secondary)] bg-background-alt p-4 text-sm leading-6 text-foreground">
             Producto por encargo. Coordinamos disponibilidad y preparacion por
             WhatsApp antes de avanzar.
           </div>

@@ -3,9 +3,9 @@ import { siteConfig } from "@/config/site";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    background_color: "#fff7f1",
+    background_color: "#F7F3EC",
     description:
-      "Accesorios, celulares y tecnologia elegidos con una mirada suave, moderna y personal.",
+      "Textiles, objetos y detalles para vestir cada ambiente con calidez natural.",
     display: "standalone",
     icons: [
       {
@@ -15,9 +15,9 @@ export default function manifest(): MetadataRoute.Manifest {
         type: "image/png",
       },
     ],
-    name: "W.todocell",
-    short_name: "W.todocell",
+    name: "VITA HOGAR",
+    short_name: "VITA HOGAR",
     start_url: "/",
-    theme_color: "#fff7f1",
+    theme_color: "#806047",
   };
 }

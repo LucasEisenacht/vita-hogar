@@ -198,7 +198,7 @@ export function ShopToolbar({
     <>
       <form
         action={actionPath}
-        className="hidden scroll-mt-28 gap-4 rounded-[24px] border border-white/54 bg-[rgba(255,250,248,0.48)] p-3.5 shadow-[0_12px_34px_rgba(74,55,47,0.045)] backdrop-blur-[16px] lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
+        className="vita-shop-toolbar hidden scroll-mt-28 gap-4 rounded-[24px] border border-white/54 bg-[rgba(255,250,248,0.48)] p-3.5 shadow-[0_12px_34px_rgba(74,55,47,0.045)] backdrop-blur-[16px] lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
       >
         <HiddenCategoryInput
           categorySlug={categorySlug}
@@ -237,7 +237,7 @@ export function ShopToolbar({
         </div>
       </form>
 
-      <div className="mt-3.5 scroll-mt-28 rounded-[22px] border border-white/54 bg-[rgba(255,250,248,0.52)] p-4 shadow-[0_8px_22px_rgba(74,55,47,0.035)] backdrop-blur-[16px] lg:hidden">
+      <div className="vita-shop-toolbar-mobile mt-3.5 scroll-mt-28 rounded-[22px] border border-white/54 bg-[rgba(255,250,248,0.52)] p-4 shadow-[0_8px_22px_rgba(74,55,47,0.035)] backdrop-blur-[16px] lg:hidden">
         <div className="flex items-center justify-between gap-3">
           <span className="inline-flex rounded-full border border-primary/16 bg-secondary/52 px-3 py-1 text-[0.82rem] font-bold text-primary-hover">
             {resultCount} productos
@@ -315,7 +315,7 @@ export function ShopToolbar({
           <section
             aria-label="Filtros de catalogo"
             aria-modal="true"
-            className="ml-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-[400px] flex-col overflow-hidden rounded-[28px] border border-white/60 bg-[rgba(255,250,248,0.82)] shadow-[0_24px_72px_rgba(74,55,47,0.15)] backdrop-blur-[20px]"
+            className="vita-shop-filter-drawer ml-auto flex max-h-[calc(100dvh-2rem)] w-full max-w-[400px] flex-col overflow-hidden rounded-[28px] border border-white/60 bg-[rgba(255,250,248,0.82)] shadow-[0_24px_72px_rgba(74,55,47,0.15)] backdrop-blur-[20px]"
             role="dialog"
           >
             <div className="flex items-center justify-between gap-4 border-b border-white/45 p-4">

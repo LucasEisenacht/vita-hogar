@@ -10,11 +10,11 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "wt-primary-button-shine bg-primary text-primary-foreground shadow-[0_14px_30px_rgba(207,142,168,0.22)] hover:-translate-y-0.5 hover:bg-primary-hover hover:shadow-[0_18px_38px_rgba(207,142,168,0.28)]",
+    "bg-primary text-primary-foreground hover:bg-primary-hover",
   secondary:
-    "border border-border bg-surface text-foreground shadow-[0_10px_24px_rgba(74,55,47,0.05)] hover:-translate-y-0.5 hover:border-primary hover:bg-surface-soft hover:text-primary-hover hover:shadow-[0_14px_30px_rgba(74,55,47,0.08)]",
+    "border border-border bg-surface text-foreground hover:border-primary hover:bg-background-alt",
   ghost:
-    "bg-transparent text-foreground hover:bg-surface-soft hover:text-primary-hover",
+    "bg-transparent text-foreground hover:bg-background-alt hover:text-primary-hover",
 };
 
 const sizes: Record<ButtonSize, string> = {
@@ -38,7 +38,7 @@ export function buttonStyles({
   variant?: ButtonVariant;
 }) {
   return cn(
-    "inline-flex shrink-0 items-center justify-center gap-2 rounded-full font-semibold transition-all duration-[250ms] ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 disabled:pointer-events-none disabled:cursor-not-allowed disabled:translate-y-0 disabled:opacity-55 disabled:shadow-none motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+    "inline-flex shrink-0 items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-55 motion-reduce:transition-none",
     variants[variant],
     sizes[size],
     className,

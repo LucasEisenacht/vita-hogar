@@ -19,7 +19,7 @@ export function LifestyleBanner() {
           <HeartMark className="pointer-events-none absolute bottom-12 right-20 hidden h-6 w-6 opacity-25 sm:block" />
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(320px,1fr)] lg:items-center">
             <div className="max-w-2xl space-y-5">
-              <Badge>Mirada W.todocell</Badge>
+              <Badge>Mirada VITA HOGAR</Badge>
               <h2 className="font-display text-3xl font-semibold leading-tight text-foreground sm:text-5xl">
                 Elegimos productos que tambi&eacute;n nos gustar&iacute;a usar.
               </h2>

@@ -20,7 +20,7 @@ export default function CartPage() {
           <>
             <div className="max-w-3xl space-y-3">
               <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
-                W.todocell
+                VITA HOGAR
               </p>
               <h1 className="font-display text-4xl font-semibold text-foreground sm:text-5xl">
                 Tu carrito

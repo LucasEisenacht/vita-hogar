@@ -30,7 +30,6 @@ export function createOrganizationJsonLd() {
     "@type": "Organization",
     logo: buildPublicUrl(siteConfig.logo.src),
     name: siteConfig.name,
-    sameAs: [siteConfig.instagram.url],
     url: getPublicSiteUrl(),
   });
 }

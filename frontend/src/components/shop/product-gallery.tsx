@@ -20,15 +20,15 @@ function ProductPlaceholder({ name }: { name: string }) {
   return (
     <div
       aria-label={`Placeholder de ${name}`}
-      className="storefront-panel relative min-h-[440px] overflow-hidden rounded-[32px] p-5 sm:min-h-[500px]"
+      className="relative min-h-[440px] overflow-hidden border border-border bg-background-alt p-5 sm:min-h-[500px]"
       role="img"
     >
-      <div className="absolute inset-6 rounded-[28px] border border-white/70 bg-surface/45" />
-      <div className="absolute left-10 top-10 h-24 w-40 rounded-full bg-primary/25" />
-      <div className="absolute bottom-8 right-8 h-28 w-28 rounded-[24px] bg-surface/75 shadow-[0_14px_34px_rgba(74,55,47,0.07)]" />
+      <div className="absolute inset-6 border border-border bg-surface" />
+      <div className="absolute left-10 top-10 h-24 w-40 bg-[var(--accent-secondary)]/20" />
+      <div className="absolute bottom-8 right-8 h-28 w-28 bg-surface" />
       <div className="relative flex h-full min-h-[400px] items-center justify-center sm:min-h-[460px]">
-        <div className="h-2/3 w-1/2 rounded-[28px] border border-border bg-background/80 p-4 shadow-[0_18px_46px_rgba(74,55,47,0.08)]">
-          <div className="h-full rounded-[24px] bg-surface/70" />
+        <div className="h-2/3 w-1/2 border border-border bg-background p-4">
+          <div className="h-full bg-surface" />
         </div>
       </div>
     </div>
@@ -119,10 +119,10 @@ export function ProductGallery({
               <button
                 aria-label={`Ver imagen ${index + 1} de ${product.name}`}
                 aria-pressed={isSelected}
-                className={`relative aspect-square h-[88px] w-[88px] shrink-0 overflow-hidden rounded-[21px] border bg-surface/50 backdrop-blur-sm transition-all duration-[260ms] hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-[0_12px_26px_rgba(74,55,47,0.065)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:h-auto lg:w-full ${
+                className={`relative aspect-[4/5] h-[96px] w-[76px] shrink-0 overflow-hidden border bg-surface transition-colors duration-200 hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none motion-reduce:hover:translate-y-0 lg:h-auto lg:w-full ${
                   isSelected
-                    ? "border-primary shadow-[0_12px_26px_rgba(207,142,168,0.14)] ring-2 ring-ring/32"
-                    : "border-white/52"
+                    ? "border-[var(--accent-secondary)] ring-1 ring-[var(--accent-secondary)]"
+                    : "border-border"
                 }`}
                 key={image.id}
                 onClick={() => selectImage(image)}
@@ -143,10 +143,10 @@ export function ProductGallery({
         </div>
       ) : null}
 
-      <div className="group storefront-panel-strong order-1 relative aspect-[5/6] min-h-[440px] overflow-hidden rounded-[32px] md:cursor-zoom-in sm:min-h-[500px] lg:order-2 lg:min-h-[min(620px,calc(100vh-188px))]">
+      <div className="group order-1 relative aspect-[4/5] min-h-[440px] overflow-hidden bg-background-alt md:cursor-zoom-in sm:min-h-[500px] lg:order-2 lg:min-h-[min(680px,calc(100vh-170px))]">
         <Image
           alt={selectedImage.alt}
-          className="animate-[wtodocell-hero-bg_280ms_ease-out] object-cover transition-transform duration-[280ms] ease-out group-hover:scale-[1.018] motion-reduce:animate-none motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.015] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           fill
           key={`${variantSlug ?? "default"}-${selectedImage.id}`}
           priority={selectedImage.id === initialImageId}
@@ -154,8 +154,7 @@ export function ProductGallery({
           sizes="(min-width: 1280px) 55vw, (min-width: 1024px) 58vw, 100vw"
           src={selectedImage.url}
         />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_68%,rgba(74,55,47,0.08)_100%)] opacity-0 transition-opacity duration-[250ms] group-hover:opacity-100 motion-reduce:transition-none" />
-        <div className="absolute right-4 top-4 flex items-center gap-2 rounded-full border border-white/62 bg-white/58 px-3 py-2 text-xs font-semibold text-foreground shadow-[0_12px_26px_rgba(74,55,47,0.08)] backdrop-blur-md">
+        <div className="absolute right-4 top-4 flex items-center gap-2 border border-border bg-surface px-3 py-2 text-xs font-semibold text-foreground">
           <svg
             aria-hidden="true"
             className="h-4 w-4 text-primary-hover"
@@ -173,7 +172,7 @@ export function ProductGallery({
           Zoom
         </div>
         {images.length > 1 ? (
-          <p className="absolute bottom-4 left-4 rounded-full border border-white/58 bg-white/58 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-md">
+          <p className="absolute bottom-4 left-4 border border-border bg-surface px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             Imagen {selectedIndex + 1} de {images.length}
           </p>
         ) : null}

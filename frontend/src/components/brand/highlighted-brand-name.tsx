@@ -18,7 +18,7 @@ export function HighlightedBrandName({
       )}
       {...props}
     >
-      W.todocell
+      VITA HOGAR
     </span>
   );
 }

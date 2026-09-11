@@ -13,6 +13,10 @@ type MiniCartItemProps = {
   onNavigate: () => void;
 };
 
+function canRenderCartImage(url?: string): url is string {
+  return typeof url === "string" && url.startsWith("/");
+}
+
 function RemoveIcon() {
   return (
     <svg
@@ -41,6 +45,7 @@ export function MiniCartItem({
   const isAtMaxStock = item.quantity >= quantityLimit;
   const lineTotal = item.price * item.quantity;
   const imageAlt = item.image?.alt ?? `Imagen de ${item.name}`;
+  const imageUrl = item.image?.url;
   const details = [
     item.selectedColor ? `Color: ${item.selectedColor}` : "",
     item.variantId && item.selectedModelBrand && item.selectedModel
@@ -68,16 +73,16 @@ export function MiniCartItem({
         href={`/producto/${item.slug}`}
         onClick={onNavigate}
       >
-        {item.image?.url ? (
+        {canRenderCartImage(imageUrl) ? (
           <Image
             alt={imageAlt}
             className="object-cover"
             fill
             sizes="88px"
-            src={item.image.url}
+            src={imageUrl}
           />
         ) : (
-          <div className="h-full w-full bg-[linear-gradient(135deg,var(--surface-soft),var(--surface))]" />
+          <div className="h-full w-full bg-background-alt" />
         )}
       </Link>
 

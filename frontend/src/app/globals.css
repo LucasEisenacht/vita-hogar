@@ -1,22 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff7f1;
-  --foreground: #2f2927;
-  --surface: #fffdfb;
-  --surface-soft: #fff0f5;
-  --primary: #dfa5b9;
-  --primary-hover: #cf8ea8;
-  --primary-foreground: #2f2927;
-  --secondary: #f5e1e8;
-  --accent: #ead0da;
-  --muted: #f8eee9;
-  --muted-foreground: #7f6f69;
-  --border: #eadbd4;
-  --ring: #dfa5b9;
-  --success: #7fa88b;
-  --warning: #c89b52;
-  --destructive: #c76767;
+  --background: #F6F1E8;
+  --background-alt: #E9DFD1;
+  --surface: #FFFDF8;
+  --surface-elevated: #FFFFFF;
+  --surface-soft: #E9DFD1;
+  --foreground: #2E2924;
+  --text-primary: #2E2924;
+  --text-secondary: #625A50;
+  --primary: #7B5D43;
+  --primary-hover: #644933;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E9DFD1;
+  --accent: #71806E;
+  --muted: #E9DFD1;
+  --muted-foreground: #8A7F73;
+  --border: #D6C9BA;
+  --ring: #6E4A32;
+  --success: #3F6B4A;
+  --warning: #8A622D;
+  --destructive: #A33F3B;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --shadow-1: 0 4px 16px rgba(46, 41, 36, 0.06);
+  --shadow-2: 0 12px 32px rgba(46, 41, 36, 0.08);
+  --transition-fast: 150ms;
+  --transition-base: 220ms;
 }
 
 @theme inline {
@@ -36,8 +47,8 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-destructive: var(--destructive);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-manrope);
+  --font-sans: var(--font-source-sans);
+  --font-display: var(--font-newsreader);
 }
 
 html {
@@ -1384,5 +1395,991 @@ a:hover {
 
   .global-sparkle-field--texture::before {
     display: none;
+  }
+}
+
+/* VITA HOGAR — Etapa 3: foundations, navbar and Home only */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-source-sans), Arial, Helvetica, sans-serif;
+}
+::selection { background: var(--background-alt); color: var(--foreground); }
+a { text-decoration-color: color-mix(in srgb, var(--primary) 58%, transparent); }
+a:hover { color: var(--primary-hover); }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.font-display { font-family: var(--font-newsreader), Georgia, "Times New Roman", serif; font-weight: 400; }
+.vita-label { color: var(--primary); font-family: var(--font-source-sans), Arial, sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; line-height: 1.2; text-transform: uppercase; }
+.home-page-shell { isolation: auto; overflow: clip; background: var(--background); }
+.home-page-shell::before, .home-page-shell::after { display: none; }
+.home-page-shell > * { position: relative; z-index: auto; }
+.home-hero-placeholder, .home-editorial-placeholder { align-items: stretch; background: #D8CCBC; display: flex; justify-content: center; padding: 1.5rem; }
+.home-hero-placeholder__frame { align-items: flex-end; border: 1px solid rgba(46, 41, 36, 0.28); color: var(--text-secondary); display: flex; font-family: var(--font-source-sans), Arial, sans-serif; font-size: 0.875rem; justify-content: flex-start; padding: 1.25rem; width: 100%; }
+.home-editorial-placeholder { align-items: flex-end; background: #C8B9A6; color: var(--foreground); font-family: var(--font-source-sans), Arial, sans-serif; font-size: 0.875rem; padding: 2rem; }
+.home-products .wt-card-hover-spark { border: 0; border-radius: 0; box-shadow: none; padding: 0; background: transparent; }
+.home-products .wt-card-hover-spark::after { display: none; }
+.home-products .wt-card-hover-spark:hover { box-shadow: none; transform: none; }
+.home-products .wt-card-hover-spark > div { padding: 0; }
+.home-products .wt-card-hover-spark > div > div:first-child { border-radius: 0; background: var(--background-alt); }
+.home-products .wt-card-hover-spark img { border-radius: 0; }
+.home-products .wt-card-hover-spark [class*="backdrop-blur"] { backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: none; }
+.home-products .wt-card-hover-spark > div > div:last-child { padding: 1rem 0 0; }
+.home-products .wt-card-hover-spark .whitespace-nowrap { font-family: var(--font-source-sans), Arial, sans-serif; font-weight: 700; }
+.home-products .wt-card-hover-spark h3 { font-family: var(--font-newsreader), Georgia, serif; font-weight: 500; }
+.home-products .wt-card-hover-spark:hover h3, .home-products .wt-card-hover-spark:hover span { color: var(--primary); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 1ms !important; }
+}
+/* VITA HOGAR — catálogo editorial provisional */
+.vita-storefront-shell { background: var(--background); min-height: 100%; }
+.vita-catalog-hero { background: var(--background); }
+.vita-catalog-photo-placeholder { background: #d8ccbc; }
+.vita-catalog-photo-placeholder > div { color: var(--text-secondary); font-family: var(--font-source-sans), Arial, sans-serif; }
+.vita-category-chips a { border-radius: 0; box-shadow: none; }
+.vita-catalog-grid .wt-card-hover-spark { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; }
+.vita-catalog-grid .wt-card-hover-spark::after { display: none; }
+.vita-catalog-grid .wt-card-hover-spark:hover { box-shadow: none; transform: none; }
+.vita-catalog-grid .wt-card-hover-spark > div { padding: 0; }
+.vita-catalog-grid .wt-card-hover-spark > div > div:first-child { background: var(--background-alt); border-radius: 0; }
+.vita-catalog-grid .wt-card-hover-spark img { border-radius: 0; }
+.vita-catalog-grid .wt-card-hover-spark > div > div:last-child { padding: 1rem 0 0; }
+.vita-catalog-grid .wt-card-hover-spark h3 { font-family: var(--font-newsreader), Georgia, serif; font-weight: 500; }
+.vita-catalog-grid .wt-card-hover-spark:hover h3 { color: var(--primary); }
+.vita-storefront-shell form[action="/tienda"],
+.vita-storefront-shell #catalog-mobile-filters > section { background: var(--surface) !important; border: 1px solid var(--border) !important; border-radius: 0 !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+.vita-storefront-shell form[action="/tienda"] select { background: var(--surface) !important; border-color: var(--border) !important; border-radius: 0 !important; box-shadow: none !important; }
+.vita-empty-catalog { border-radius: 0; }
+/* VITA HOGAR — Etapa 4: refinement of global navigation, Home and Tienda */
+.vita-announcement-bar {
+  background: var(--background-alt);
+  color: var(--text-secondary);
+}
+.vita-announcement-bar > div {
+  letter-spacing: 0.1em;
+}
+.vita-navbar {
+  box-shadow: none;
+}
+.vita-navbar [aria-current="page"] {
+  position: relative;
+}
+.vita-navbar [aria-current="page"]::after {
+  background: var(--primary);
+  bottom: 0.65rem;
+  content: "";
+  height: 1px;
+  left: 0.75rem;
+  position: absolute;
+  right: 0.75rem;
+}
+.vita-explore-trigger svg {
+  color: var(--accent-secondary);
+}
+.vita-explore-panel {
+  box-shadow: 0 10px 22px rgba(46, 41, 36, 0.07);
+}
+.vita-explore-panel > div {
+  position: relative;
+}
+.vita-explore-panel > div::before {
+  background: var(--accent-secondary);
+  content: "";
+  height: 1px;
+  left: 0;
+  opacity: 0.58;
+  position: absolute;
+  top: 0;
+  width: 4.5rem;
+}
+.vita-botanical-sprig {
+  height: 7.5rem;
+  opacity: 0.13;
+  pointer-events: none;
+  position: absolute;
+  transform: rotate(-24deg);
+  width: 3.5rem;
+}
+.vita-botanical-sprig::before,
+.vita-botanical-sprig::after {
+  background: var(--accent-secondary);
+  content: "";
+  height: 3.1rem;
+  position: absolute;
+  width: 1.25rem;
+}
+.vita-botanical-sprig::before {
+  border-radius: 100% 0 100% 0;
+  left: 0.1rem;
+  top: 0.5rem;
+}
+.vita-botanical-sprig::after {
+  border-radius: 0 100% 0 100%;
+  bottom: 0.45rem;
+  right: 0.1rem;
+}
+.vita-botanical-sprig--hero {
+  bottom: -2.5rem;
+  right: 2rem;
+}
+.vita-botanical-sprig--catalog {
+  right: 1.75rem;
+  top: 1rem;
+}
+.vita-habitat-grid > a:first-child {
+  background-position: center;
+}
+.vita-category-chips a {
+  border-radius: 0.5rem;
+}
+.vita-category-chips a:hover {
+  border-color: var(--accent-secondary);
+  color: var(--primary);
+}
+.vita-storefront-shell form[action="/tienda"] button,
+.vita-storefront-shell form[action="/tienda"] select {
+  border-radius: 0.5rem !important;
+}
+.vita-search-panel {
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 48px rgba(46, 41, 36, 0.12);
+}
+.vita-search-input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent) !important;
+}
+.vita-mini-cart {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.vita-mini-cart [class*="rounded-full"] {
+  border-radius: 0.5rem;
+}
+.vita-mini-cart footer [class*="rounded-full"] {
+  border-radius: 0;
+}
+@media (max-width: 1023px) {
+  .vita-navbar [aria-current="page"]::after {
+    display: none;
+  }
+  .vita-botanical-sprig--hero,
+  .vita-botanical-sprig--catalog {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vita-botanical-sprig,
+  .vita-botanical-sprig::before,
+  .vita-botanical-sprig::after {
+    animation: none !important;
+  }
+}.vita-search-results section {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--background);
+  border-color: var(--border);
+  border-radius: 0;
+  box-shadow: none;
+}
+.vita-search-results section a {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--surface);
+  border-color: var(--border);
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+.vita-search-page__intro,
+.vita-search-page__form {
+  box-shadow: none;
+}
+.vita-search-page .storefront-panel {
+  border-radius: 0;
+  box-shadow: none;
+}
+/* VITA HOGAR — corrección visual pública fuerte */
+.vita-navbar {
+  border-bottom-color: color-mix(in srgb, var(--accent-secondary) 32%, var(--border));
+}
+.vita-navbar [aria-current="page"] {
+  color: var(--foreground);
+}
+.vita-navbar [aria-current="page"]::after {
+  background: var(--accent-secondary);
+  bottom: 0.45rem;
+  height: 2px;
+}
+.vita-navbar nav > a:hover,
+.vita-explore-trigger:hover,
+.vita-explore-trigger[aria-expanded="true"] {
+  color: var(--accent-secondary);
+}
+.vita-explore-trigger svg {
+  margin-top: 1px;
+}
+.vita-explore-panel {
+  border-top: 2px solid var(--accent-secondary);
+}
+.vita-explore-panel nav a:hover {
+  border-color: var(--accent-secondary);
+}
+.vita-announcement-bar {
+  border-bottom-color: color-mix(in srgb, var(--accent-secondary) 24%, var(--border));
+}
+.vita-botanical-motif {
+  color: var(--accent-secondary);
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+.vita-botanical-motif--hero {
+  opacity: 0.58;
+}
+.vita-botanical-motif--catalog {
+  inset: 1rem 1.25rem auto auto;
+  height: 9rem;
+  opacity: 0.2;
+  width: 7rem;
+}
+.vita-laurel-leaf {
+  color: color-mix(in srgb, var(--accent-secondary) 88%, white);
+  display: block;
+  position: absolute;
+  width: 2.5rem;
+  will-change: transform;
+}
+.vita-laurel-leaf svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.vita-laurel-leaf--one { left: 12%; top: 12%; transform: rotate(-32deg); animation: vita-laurel-float-one 13s ease-in-out infinite; }
+.vita-laurel-leaf--two { left: 27%; top: 62%; transform: rotate(42deg) scale(.8); animation: vita-laurel-float-two 16s ease-in-out 1.2s infinite; }
+.vita-laurel-leaf--three { left: 45%; top: 18%; transform: rotate(-12deg) scale(.7); animation: vita-laurel-float-three 14s ease-in-out 2.4s infinite; }
+.vita-laurel-leaf--four { left: 65%; top: 58%; transform: rotate(28deg) scale(.92); animation: vita-laurel-float-four 17s ease-in-out .4s infinite; }
+.vita-laurel-leaf--five { left: 78%; top: 14%; transform: rotate(55deg) scale(.66); animation: vita-laurel-float-five 15s ease-in-out 1.8s infinite; }
+.vita-laurel-leaf--six { left: 88%; top: 42%; transform: rotate(-38deg) scale(.76); animation: vita-laurel-float-six 18s ease-in-out 3s infinite; }
+@keyframes vita-laurel-float-one {
+  0%, 100% { transform: translate3d(0, -8px, 0) rotate(-32deg); }
+  50% { transform: translate3d(12px, 34px, 0) rotate(-18deg); }
+}
+@keyframes vita-laurel-float-two {
+  0%, 100% { transform: translate3d(0, 8px, 0) rotate(42deg) scale(.8); }
+  50% { transform: translate3d(-14px, -28px, 0) rotate(28deg) scale(.8); }
+}
+@keyframes vita-laurel-float-three {
+  0%, 100% { transform: translate3d(0, -6px, 0) rotate(-12deg) scale(.7); }
+  50% { transform: translate3d(10px, 26px, 0) rotate(4deg) scale(.7); }
+}
+@keyframes vita-laurel-float-four {
+  0%, 100% { transform: translate3d(0, 10px, 0) rotate(28deg) scale(.92); }
+  50% { transform: translate3d(-10px, -30px, 0) rotate(42deg) scale(.92); }
+}
+@keyframes vita-laurel-float-five {
+  0%, 100% { transform: translate3d(0, -10px, 0) rotate(55deg) scale(.66); }
+  50% { transform: translate3d(-12px, 32px, 0) rotate(70deg) scale(.66); }
+}
+@keyframes vita-laurel-float-six {
+  0%, 100% { transform: translate3d(0, 4px, 0) rotate(-38deg) scale(.76); }
+  50% { transform: translate3d(8px, -26px, 0) rotate(-52deg) scale(.76); }
+}
+.vita-home-hero > div > div {
+  border-color: color-mix(in srgb, var(--accent-secondary) 36%, var(--border));
+}
+.vita-home-hero > div > div > div:last-child {
+  position: relative;
+}
+.vita-home-hero > div > div > div:last-child::before {
+  background: var(--accent-secondary);
+  content: "";
+  height: 3rem;
+  left: 0;
+  opacity: 0.72;
+  position: absolute;
+  top: 2.2rem;
+  width: 2px;
+}
+.vita-habitat-grid > a:first-child {
+  background-position: center;
+}
+.vita-category-chips a {
+  border-radius: 0.5rem;
+}
+.vita-category-chips a:hover {
+  border-color: var(--accent-secondary);
+  color: var(--primary);
+}
+.vita-storefront-shell form[action="/tienda"] button,
+.vita-storefront-shell form[action="/tienda"] select {
+  border-radius: 0.5rem !important;
+}
+.vita-search-panel {
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 48px rgba(46, 41, 36, 0.12);
+}
+.vita-search-input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent) !important;
+}
+.vita-mini-cart {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.vita-mini-cart [class*="rounded-full"] {
+  border-radius: 0.5rem;
+}
+.vita-mini-cart footer [class*="rounded-full"] {
+  border-radius: 0;
+}
+.vita-search-results section a {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: var(--surface);
+  border-color: var(--border);
+  border-radius: 0.5rem;
+  box-shadow: none;
+}
+.vita-search-page__intro,
+.vita-search-page__form {
+  box-shadow: none;
+}
+.vita-search-page .storefront-panel {
+  border-radius: 0;
+  box-shadow: none;
+}
+@media (max-width: 1023px) {
+  .vita-navbar [aria-current="page"]::after {
+    display: none;
+  }
+  .vita-botanical-motif--hero {
+    opacity: 0.3;
+  }
+  .vita-botanical-motif--catalog {
+    height: 5rem;
+    opacity: 0.18;
+    width: 3.5rem;
+  }
+  .vita-laurel-leaf {
+    width: 1.9rem;
+  }
+  .vita-laurel-leaf:nth-child(n + 4) {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vita-laurel-leaf {
+    animation: none !important;
+  }
+}
+.brand-leaf-field {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+.brand-leaf {
+  display: block;
+  position: absolute;
+  width: 3.5rem;
+  will-change: transform;
+}
+.brand-leaf svg {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+.brand-leaf--one { left: 8%; top: 16%; animation: brand-leaf-drift-one 22s ease-in-out infinite; }
+.brand-leaf--two { left: 32%; top: 68%; animation: brand-leaf-drift-two 26s ease-in-out 1.5s infinite; }
+.brand-leaf--three { left: 56%; top: 11%; animation: brand-leaf-drift-three 24s ease-in-out 2.5s infinite; }
+.brand-leaf--four { left: 76%; top: 58%; animation: brand-leaf-drift-four 28s ease-in-out .8s infinite; }
+.brand-leaf--five { left: 91%; top: 28%; animation: brand-leaf-drift-five 20s ease-in-out 3s infinite; }
+.brand-leaf-field--home {
+  opacity: 0.6;
+}
+.brand-leaf-field--catalog {
+  bottom: 1rem;
+  height: 6.5rem;
+  inset: auto 1.25rem 1rem auto;
+  opacity: 0.2;
+  width: 5.5rem;
+}
+.brand-leaf-field--catalog .brand-leaf {
+  width: 2rem;
+}
+.brand-leaf-field--catalog .brand-leaf--one {
+  left: auto;
+  right: 0;
+  top: 0;
+}
+.brand-leaf-field--catalog .brand-leaf--two {
+  left: auto;
+  right: 42%;
+  top: 42%;
+}
+.brand-leaf-field--footer {
+  inset: auto 0 0 auto;
+  height: 15rem;
+  opacity: 0.4;
+  width: 22rem;
+}
+.brand-leaf-field--footer .brand-leaf {
+  width: 2.8rem;
+}
+@keyframes brand-leaf-drift-one {
+  0%, 100% { transform: translate3d(0, -8px, 0) rotate(-18deg); }
+  50% { transform: translate3d(16px, 28px, 0) rotate(-7deg); }
+}
+@keyframes brand-leaf-drift-two {
+  0%, 100% { transform: translate3d(0, 8px, 0) rotate(24deg); }
+  50% { transform: translate3d(-18px, -24px, 0) rotate(11deg); }
+}
+@keyframes brand-leaf-drift-three {
+  0%, 100% { transform: translate3d(0, -10px, 0) rotate(18deg); }
+  50% { transform: translate3d(12px, 24px, 0) rotate(30deg); }
+}
+@keyframes brand-leaf-drift-four {
+  0%, 100% { transform: translate3d(0, 10px, 0) rotate(-24deg); }
+  50% { transform: translate3d(-12px, -26px, 0) rotate(-12deg); }
+}
+@keyframes brand-leaf-drift-five {
+  0%, 100% { transform: translate3d(0, -5px, 0) rotate(34deg); }
+  50% { transform: translate3d(10px, 22px, 0) rotate(20deg); }
+}
+@media (max-width: 767px) {
+  .brand-leaf:nth-child(n + 4) { display: none; }
+  .brand-leaf-field--home { opacity: 0.28; }
+  .brand-leaf-field--catalog { opacity: 0.14; }
+  .brand-leaf-field--footer {
+    height: 9rem;
+    opacity: 0.24;
+    width: 13rem;
+  }
+  .brand-leaf-field--footer .brand-leaf { width: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-leaf { animation: none !important; }
+}
+.home-page-shell > .brand-leaf-field {
+  z-index: 2;
+}
+.vita-footer {
+  overflow: hidden;
+  position: relative;
+}
+.vita-footer > .brand-leaf-field {
+  z-index: 0;
+}
+.vita-footer > div {
+  position: relative;
+  z-index: 1;
+}.vita-explore-trigger { color: var(--text-primary) !important; }
+@media (max-width: 639px) {
+  .vita-navbar a[aria-label^="Mis favoritos"],
+  .vita-navbar a[aria-label="Ingresar a mi cuenta"],
+  .vita-navbar a[aria-label="Ir a mi cuenta"] {
+    display: none !important;
+  }
+}
+/* VITA HOGAR — hero editorial refinement */
+.vita-home-hero {
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+}
+.vita-home-hero__frame,
+.vita-catalog-hero__frame {
+  background: color-mix(in srgb, var(--surface) 88%, var(--background-alt));
+  border: 1px solid color-mix(in srgb, var(--border) 86%, #cbb9a4);
+  border-radius: 10px;
+  box-shadow: 0 18px 48px rgba(73, 57, 43, 0.07);
+  isolation: isolate;
+}
+.vita-home-hero__frame {
+  min-height: clamp(31rem, 52vw, 39rem);
+}
+.vita-home-hero__media,
+.vita-catalog-hero__media {
+  background: #ded2c3;
+  margin: 0.45rem 0 0.45rem 0.45rem;
+}
+.vita-home-hero__image,
+.vita-catalog-hero__image {
+  object-position: 50% 52%;
+  transform: scale(1.012);
+}
+.vita-home-hero__media::after,
+.vita-catalog-hero__media::after {
+  background: linear-gradient(90deg, rgba(46, 41, 36, 0.09), transparent 24%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+.vita-home-hero__content,
+.vita-catalog-hero__content {
+  background: color-mix(in srgb, var(--surface) 78%, var(--background-alt));
+  position: relative;
+}
+.vita-home-hero__content {
+  border-left: 1px solid color-mix(in srgb, var(--border) 74%, transparent);
+}
+.vita-home-hero__content::before,
+.vita-catalog-hero__content::before {
+  background: color-mix(in srgb, var(--primary) 56%, var(--border));
+  content: "";
+  height: 2.75rem;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  top: 2.5rem;
+  width: 1px;
+}
+.vita-home-hero .vita-botanical-motif--hero {
+  bottom: -2.25rem;
+  opacity: 0.32;
+  right: 2rem;
+}
+.vita-home-hero__primary-cta,
+.vita-catalog-hero__primary-cta {
+  box-shadow: 0 7px 16px rgba(100, 73, 51, 0.16);
+  letter-spacing: 0.01em;
+}
+.vita-home-hero__primary-cta:hover,
+.vita-catalog-hero__primary-cta:hover {
+  box-shadow: 0 10px 20px rgba(100, 73, 51, 0.2);
+  transform: translateY(-1px);
+}
+.vita-home-hero__secondary-cta {
+  transition: color var(--transition-fast) ease, text-underline-offset var(--transition-fast) ease;
+}
+.vita-home-hero__secondary-cta:hover {
+  color: var(--primary-hover);
+  text-underline-offset: 6px;
+}
+.vita-catalog-hero__content {
+  border-right: 1px solid color-mix(in srgb, var(--border) 72%, transparent);
+}
+.vita-catalog-hero__media {
+  margin: 0.45rem 0.45rem 0.45rem 0;
+}
+.vita-catalog-hero__content .brand-leaf-field--catalog {
+  opacity: 0.15;
+}
+@media (max-width: 1023px) {
+  .vita-home-hero__frame {
+    min-height: 0;
+  }
+  .vita-home-hero__media,
+  .vita-catalog-hero__media {
+    margin: 0.4rem 0.4rem 0;
+    min-height: clamp(18rem, 68vw, 28rem);
+  }
+  .vita-home-hero__content,
+  .vita-catalog-hero__content {
+    border: 0;
+  }
+  .vita-catalog-hero__media {
+    margin: 0.4rem 0.4rem 0;
+  }
+  .vita-home-hero__content::before,
+  .vita-catalog-hero__content::before {
+    top: 2rem;
+  }
+}
+@media (max-width: 639px) {
+  .vita-home-hero__frame,
+  .vita-catalog-hero__frame {
+    border-radius: 7px;
+  }
+  .vita-home-hero__content,
+  .vita-catalog-hero__content {
+    padding-bottom: 2.75rem;
+    padding-top: 2.75rem;
+  }
+  .vita-home-hero .vita-botanical-motif--hero {
+    opacity: 0.2;
+    right: 1rem;
+  }
+}
+/* VITA HOGAR — boutique editorial navbar and catalog framing */
+.vita-announcement-bar {
+  position: relative;
+  border-bottom-color: color-mix(in srgb, var(--border) 70%, #cbb9a4);
+  background: linear-gradient(90deg, #eee6da 0%, #f7f2ea 48%, #eee6da 100%);
+  color: var(--text-secondary);
+}
+
+.vita-announcement-bar::after {
+  position: absolute;
+  right: 18%;
+  bottom: -1px;
+  left: 18%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-secondary) 58%, #71806e), transparent);
+  opacity: 0.44;
+}
+
+.vita-announcement-bar > div {
+  min-height: 2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+
+.vita-navbar {
+  position: relative;
+  border-bottom-color: color-mix(in srgb, var(--border) 72%, #cbb9a4);
+  background:
+    linear-gradient(112deg, rgba(255, 253, 248, 0.985), rgba(247, 242, 233, 0.99)),
+    repeating-linear-gradient(0deg, rgba(123, 93, 67, 0.018) 0 1px, transparent 1px 5px);
+  box-shadow: 0 8px 22px rgba(82, 61, 43, 0.045);
+}
+
+.vita-navbar::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-primary) 34%, #806047), transparent);
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.vita-navbar > div {
+  position: relative;
+  z-index: 1;
+}
+
+.vita-navbar__logo {
+  transform: translateY(0);
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.vita-navbar__logo:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 3px 5px rgba(91, 69, 49, 0.1));
+}
+
+.vita-navbar nav > a,
+.vita-explore-trigger {
+  position: relative;
+  color: var(--text-secondary);
+  letter-spacing: 0.012em;
+  transition: color 180ms ease;
+}
+
+.vita-navbar nav > a::after,
+.vita-explore-trigger::after {
+  position: absolute;
+  right: 0.1rem;
+  bottom: 0.38rem;
+  left: 0.1rem;
+  height: 1px;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+  transition: transform 200ms ease;
+}
+
+.vita-navbar nav > a:hover,
+.vita-navbar nav > a[aria-current="page"],
+.vita-explore-trigger:hover,
+.vita-explore-trigger[aria-expanded="true"] {
+  color: var(--primary-hover);
+}
+
+.vita-navbar nav > a:hover::after,
+.vita-navbar nav > a[aria-current="page"]::after,
+.vita-explore-trigger:hover::after,
+.vita-explore-trigger[aria-expanded="true"]::after {
+  transform: scaleX(1);
+}
+
+.vita-explore-trigger svg {
+  opacity: 0.78;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.vita-explore-trigger:hover svg,
+.vita-explore-trigger[aria-expanded="true"] svg {
+  transform: translateY(1px);
+  opacity: 1;
+}
+
+.vita-navbar > div > div:last-child > a,
+.vita-navbar > div > div:last-child > button {
+  border-radius: 999px;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.vita-navbar > div > div:last-child > a:hover,
+.vita-navbar > div > div:last-child > button:hover {
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--accent-secondary) 11%, transparent);
+  color: var(--primary-hover);
+}
+
+.vita-explore-panel {
+  border-top-color: color-mix(in srgb, var(--border) 72%, #cbb9a4);
+  background: linear-gradient(112deg, rgba(255, 253, 248, 0.99), rgba(246, 241, 232, 0.99));
+  box-shadow: 0 14px 26px rgba(82, 61, 43, 0.07);
+}
+
+.vita-explore-panel nav a:hover {
+  border-color: color-mix(in srgb, var(--accent-secondary) 42%, var(--border));
+  background-color: rgba(255, 253, 248, 0.68);
+}
+
+.vita-catalog-hero__media {
+  background: #ded2c3;
+}
+
+@media (max-width: 767px) {
+  .vita-announcement-bar > div {
+    min-height: 1.9rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
+  }
+
+  .vita-navbar__logo:hover,
+  .vita-navbar > div > div:last-child > a:hover,
+  .vita-navbar > div > div:last-child > button:hover {
+    transform: none;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vita-navbar__logo,
+  .vita-navbar nav > a,
+  .vita-explore-trigger,
+  .vita-explore-trigger svg,
+  .vita-navbar > div > div:last-child > a,
+  .vita-navbar > div > div:last-child > button {
+    transition: none;
+  }
+}
+/* VITA HOGAR — navigation hierarchy refinement */
+.vita-navbar__nav {
+  gap: 0.12rem;
+}
+
+.vita-navbar__actions {
+  gap: 0.12rem;
+}
+
+.vita-navbar nav > a[aria-current="page"]::before {
+  position: absolute;
+  bottom: 0.15rem;
+  left: calc(50% - 2px);
+  width: 4px;
+  height: 4px;
+  content: "";
+  border-radius: 999px;
+  background: var(--accent-secondary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--surface) 82%, transparent);
+}
+
+@media (min-width: 1024px) {
+  .vita-navbar__nav {
+    padding: 0.28rem 0.42rem;
+    border: 1px solid color-mix(in srgb, var(--border) 78%, #cbb9a4);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 70%, var(--background-alt));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.68),
+      0 5px 15px rgba(82, 61, 43, 0.055);
+  }
+
+  .vita-navbar__nav > a,
+  .vita-navbar__nav > button {
+    border-radius: 999px;
+  }
+
+  .vita-navbar__nav > a[aria-current="page"] {
+    background: color-mix(in srgb, var(--accent-secondary) 12%, var(--surface));
+  }
+
+  .vita-navbar__actions {
+    justify-self: end;
+    margin-left: 0.75rem;
+    padding: 0.22rem;
+    border: 1px solid color-mix(in srgb, var(--border) 72%, #cbb9a4);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 76%, var(--background-alt));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+  }
+
+  .vita-catalog-hero__media {
+    aspect-ratio: 3 / 2;
+    align-self: center;
+    min-height: 0;
+    margin: 1rem 1rem 1rem 0;
+    border-radius: 6px;
+  }
+
+  .vita-catalog-hero__image {
+    transform: none;
+  }
+}
+/* VITA HOGAR — unified editorial rail and framed hero media */
+.vita-home-hero__media-shell,
+.vita-catalog-hero__media-shell {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  padding: 0.75rem;
+  background: color-mix(in srgb, var(--background-alt) 72%, var(--surface));
+}
+
+.vita-home-hero__media,
+.vita-catalog-hero__media {
+  width: 100%;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--border) 76%, #cbb9a4);
+  border-radius: 7px;
+  box-shadow: 0 8px 24px rgba(73, 57, 43, 0.075);
+}
+
+.vita-home-hero__frame {
+  min-height: clamp(30rem, 44vw, 34rem);
+}
+
+.vita-home-hero__media {
+  aspect-ratio: 7 / 5;
+  min-height: 0;
+}
+
+.vita-home-hero__image {
+  object-position: 46% 50%;
+  transform: none;
+}
+
+.vita-home-hero__media::after,
+.vita-catalog-hero__media::after {
+  border-radius: inherit;
+}
+
+.vita-home-hero__content,
+.vita-catalog-hero__content {
+  border: 0;
+}
+
+.vita-navbar {
+  padding: 0.5rem 0;
+  border-bottom: 0;
+  background: linear-gradient(180deg, #f3ecdf 0%, #f7f2e9 100%);
+  box-shadow: none;
+}
+
+.vita-navbar__rail {
+  min-height: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  .vita-navbar__rail {
+    height: 4.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid color-mix(in srgb, var(--border) 82%, #cbb9a4);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--surface) 90%, var(--background-alt));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.74),
+      0 10px 28px rgba(82, 61, 43, 0.075);
+  }
+
+  .vita-navbar__nav {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .vita-navbar__nav > a[aria-current="page"] {
+    background: color-mix(in srgb, var(--accent-secondary) 10%, transparent);
+  }
+
+  .vita-navbar__actions {
+    margin-left: 0.8rem;
+    padding: 0 0 0 0.65rem;
+    border: 0;
+    border-left: 1px solid color-mix(in srgb, var(--border) 82%, #cbb9a4);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .vita-home-hero__media-shell,
+  .vita-catalog-hero__media-shell {
+    align-self: stretch;
+  }
+
+  .vita-catalog-hero__media {
+    margin: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .vita-navbar {
+    padding: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, #cbb9a4);
+  }
+
+  .vita-home-hero__media-shell,
+  .vita-catalog-hero__media-shell {
+    padding: 0.4rem;
+  }
+
+  .vita-home-hero__media,
+  .vita-catalog-hero__media {
+    margin: 0;
+    border-radius: 5px;
+  }
+
+  .vita-home-hero__media {
+    aspect-ratio: 7 / 5;
+    min-height: 0;
+  }
+}
+/* VITA HOGAR — alignment correction for rail and framed media */
+.vita-home-hero__media-shell,
+.vita-catalog-hero__media-shell {
+  padding: 0.625rem;
+}
+
+@media (min-width: 1024px) {
+  .vita-navbar__rail {
+    height: 4.875rem;
+    min-height: 4.875rem;
+    align-items: center;
+  }
+
+  .vita-navbar__logo,
+  .vita-navbar__nav,
+  .vita-navbar__actions {
+    align-self: center;
+  }
+
+  .vita-home-hero__media-shell,
+  .vita-catalog-hero__media-shell {
+    align-items: stretch;
+  }
+
+  .vita-home-hero__media,
+  .vita-catalog-hero__media {
+    height: 100%;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .vita-home-hero__media-shell,
+  .vita-catalog-hero__media-shell {
+    padding: 0.5rem;
   }
 }

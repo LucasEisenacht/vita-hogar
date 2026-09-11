@@ -1,9 +1,9 @@
 export const siteConfig = {
-  name: "W.todocell",
-  url: "https://www.wtodocell.com.ar",
+  name: "VITA HOGAR",
+  url: "http://localhost:3000",
   logo: {
-    alt: "W.todocell",
-    src: "/brand/wtodocell-logo-cropped.png",
+    alt: "VITA HOGAR",
+    src: "/brand/vita-hogar-logo-header.png",
   },
   whatsapp: {
     number: "5491123317839",
@@ -11,9 +11,9 @@ export const siteConfig = {
     visible: "+54 9 11 2331-7839",
   },
   instagram: {
-    handle: "@w.todocell",
-    url: "https://www.instagram.com/w.todocell/",
-    username: "w.todocell",
+    handle: "VITA HOGAR",
+    url: "",
+    username: "",
   },
   location: {
     city: "Monte Grande",

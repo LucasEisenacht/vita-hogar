@@ -13,7 +13,7 @@ export function ShopHeader({
   children,
   count,
   description,
-  eyebrow = "W.todocell",
+  eyebrow = "VITA HOGAR",
   title,
 }: ShopHeaderProps) {
   return (

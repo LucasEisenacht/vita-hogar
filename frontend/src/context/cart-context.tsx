@@ -138,6 +138,10 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function isSafeCartImageUrl(value: unknown): value is string {
+  return typeof value === "string" && value.startsWith("/");
+}
+
 function isProductImage(value: unknown): value is CartItemImage {
   if (!isRecord(value)) {
     return false;
@@ -192,7 +196,7 @@ function isCartItem(value: unknown): value is CartItem {
 function getCartItemImage(product: PublicProduct): CartItemImage | undefined {
   const image: PublicProductImage | undefined = product.primaryImage;
 
-  if (!image?.url) {
+  if (!image?.url || !isSafeCartImageUrl(image.url)) {
     return undefined;
   }
 
@@ -303,7 +307,7 @@ function CartFlyToTargetAnimation({
           src={animation.image.url}
         />
       ) : (
-        <div className="h-full w-full bg-[linear-gradient(135deg,var(--surface-soft),var(--surface))]" />
+        <div className="h-full w-full bg-background-alt" />
       )}
     </div>
   );
@@ -336,6 +340,14 @@ function readStoredCart() {
         const normalizedItem: CartItem = {
           ...item,
           availabilityType,
+          image: item.image
+            ? {
+                ...item.image,
+                url: isSafeCartImageUrl(item.image.url)
+                  ? item.image.url
+                  : undefined,
+              }
+            : undefined,
         };
 
         return {

@@ -46,12 +46,12 @@ export async function generateMetadata({
         description:
           editorialExperience.description || plannedCategory.description,
         path: `/tienda/${plannedCategory.slug}`,
-        title: `${editorialExperience.breadcrumbLabel} | W.todocell`,
+        title: `${editorialExperience.breadcrumbLabel} | VITA HOGAR`,
       });
     }
 
     return {
-      title: "Categoria no encontrada | W.todocell",
+      title: "Categoria no encontrada | VITA HOGAR",
       robots: {
         follow: false,
         index: false,
@@ -63,9 +63,9 @@ export async function generateMetadata({
     description:
       editorialExperience.description ||
       activeCategory.description ||
-      `Productos de ${activeCategory.name} seleccionados por W.todocell.`,
+      `Productos de ${activeCategory.name} seleccionados por VITA HOGAR.`,
     path: `/tienda/${activeCategory.slug}`,
-    title: `${editorialExperience.breadcrumbLabel} | W.todocell`,
+    title: `${editorialExperience.breadcrumbLabel} | VITA HOGAR`,
   });
 }
 

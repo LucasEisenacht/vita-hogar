@@ -16,7 +16,7 @@ export function CatalogEditorialBlock({ block }: CatalogEditorialBlockProps) {
         <div className="relative z-10 flex min-h-[220px] flex-col justify-center gap-5 px-5 py-7 sm:px-7 lg:px-8">
           <div className="max-w-2xl space-y-3">
             <p className="font-display text-xs font-bold uppercase tracking-[0.18em] text-primary-hover">
-              Seleccion W.todocell
+              Selección VITA HOGAR
             </p>
             <div className="space-y-2.5">
               <h2 className="font-display text-2xl font-semibold leading-tight text-foreground sm:text-3xl">
