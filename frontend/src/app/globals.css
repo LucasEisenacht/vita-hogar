@@ -1872,7 +1872,7 @@ a:hover { color: var(--primary-hover); }
 .vita-footer > .brand-leaf-field {
   z-index: 0;
 }
-.vita-footer > div {
+.vita-footer > div:not(.brand-leaf-field) {
   position: relative;
   z-index: 1;
 }.vita-explore-trigger { color: var(--text-primary) !important; }
