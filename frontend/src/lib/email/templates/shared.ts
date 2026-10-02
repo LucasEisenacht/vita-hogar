@@ -115,7 +115,7 @@ function getLogoUrl() {
 
 export function getWhatsAppSupportUrl(orderNumber: string) {
   return getWhatsAppOrderUrl(
-    `Hola W.todocell, tengo una consulta sobre mi pedido ${orderNumber}.`,
+    `Hola VITA HOGAR, tengo una consulta sobre mi pedido ${orderNumber}.`,
   );
 }
 
@@ -349,7 +349,7 @@ export function renderEmailShell({
                 <tr>
                   <td style="padding:20px 28px 26px;border-top:1px solid ${colors.border};background:#fff9f7;color:${colors.muted};font-size:12px;line-height:1.65;">
                     <strong style="color:${colors.foreground};">${escapeHtml(siteConfig.name)}</strong><br>
-                    Accesorios que combinan con tu estilo.<br>
+                    Gracias por elegirnos.<br>
                     ${escapeHtml(siteConfig.location.city)}, ${escapeHtml(siteConfig.location.province)}.
                   </td>
                 </tr>

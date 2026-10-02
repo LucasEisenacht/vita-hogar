@@ -9,7 +9,7 @@ type AdminHeaderProps = {
 };
 
 export function AdminHeader({
-  eyebrow = "W.todocell Admin",
+  eyebrow = "VITA HOGAR Admin",
   roleLabel,
   subtitle,
   title,

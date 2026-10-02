@@ -14,7 +14,7 @@ export function CheckoutEmpty() {
             Tu carrito esta vacio
           </h1>
           <p className="text-base leading-7 text-muted-foreground">
-            Suma accesorios a tu carrito para finalizar la compra por WhatsApp.
+            Suma productos a tu carrito para finalizar la compra por WhatsApp.
           </p>
         </div>
         <Link className={buttonStyles({ size: "lg" })} href="/tienda">

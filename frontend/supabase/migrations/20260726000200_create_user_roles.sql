@@ -1,4 +1,4 @@
--- Secure application roles for W.todocell staff access.
+-- Secure application roles for VITA HOGAR staff access.
 do $$
 begin
   if not exists (select 1 from pg_type where typname = 'app_role') then

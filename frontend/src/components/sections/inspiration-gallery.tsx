@@ -18,7 +18,7 @@ export function InspirationGallery() {
             Inspiraci&oacute;n para todos los d&iacute;as
           </h2>
           <p className="text-base leading-7 text-muted-foreground">
-            Detalles, combinaciones y accesorios que forman parte de tu estilo.
+            Detalles, combinaciones y productos que forman parte de tu estilo.
           </p>
         </div>
 

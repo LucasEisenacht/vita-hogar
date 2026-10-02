@@ -26,13 +26,13 @@ function renderAlternativeLink() {
 
 function renderSupportLine() {
   const whatsappUrl = getAuthWhatsAppUrl(
-    "Hola W.todocell, tengo una consulta sobre mi cuenta.",
+    "Hola VITA HOGAR, tengo una consulta sobre mi cuenta.",
   );
 
   return `
     <p style="margin:22px 0 0;color:#765c66;font-size:14px;line-height:1.7;">
       Si necesitas ayuda, escribinos por WhatsApp:
-      <a href="${escapeAuthEmailHtml(whatsappUrl)}" style="color:#9f5e78;font-weight:700;text-decoration:none;">hablar con W.todocell</a>.
+      <a href="${escapeAuthEmailHtml(whatsappUrl)}" style="color:#9f5e78;font-weight:700;text-decoration:none;">hablar con VITA HOGAR</a>.
     </p>
   `;
 }
@@ -76,7 +76,7 @@ function renderAuthTemplate({
       intro,
       `${buttonLabel}: ${confirmationUrl}`,
       securityText,
-      "Soporte: escribinos por WhatsApp desde el sitio de W.todocell.",
+      "Soporte: escribinos por WhatsApp desde el sitio de VITA HOGAR.",
     ].join("\n\n"),
   };
 }
@@ -91,7 +91,7 @@ export function renderSupabaseAuthEmail(
       intro: "Usá el siguiente botón para crear una nueva contraseña.",
       securityText:
         "Si no solicitaste este cambio, ignorá este correo. Tu contraseña actual seguirá activa.",
-      subject: "Restablecé tu contraseña de W.todocell",
+      subject: "Restablecé tu contraseña de VITA HOGAR",
       title: "¿Olvidaste tu contraseña?",
     });
   }
@@ -104,17 +104,17 @@ export function renderSupabaseAuthEmail(
         "Confirmá el nuevo correo para terminar de actualizar tu cuenta.",
       securityText:
         "Si no pediste cambiar tu email, ignorá este correo y revisá la seguridad de tu cuenta.",
-      subject: "Confirmá tu nuevo email en W.todocell",
+      subject: "Confirmá tu nuevo email en VITA HOGAR",
       title: "Confirmemos tu nuevo correo",
     });
   }
 
   return renderAuthTemplate({
-    badge: "Cuenta W.todocell",
+    badge: "Cuenta VITA HOGAR",
     buttonLabel: "Confirmar mi cuenta",
     intro: "Confirmá tu correo para terminar de crear tu cuenta.",
     securityText: "Si no creaste esta cuenta, podés ignorar este correo.",
-    subject: "Confirmá tu cuenta en W.todocell",
+    subject: "Confirmá tu cuenta en VITA HOGAR",
     title: "¡Ya casi está!",
   });
 }

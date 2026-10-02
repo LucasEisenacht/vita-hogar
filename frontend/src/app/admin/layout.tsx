@@ -11,8 +11,8 @@ type AdminLayoutProps = {
 };
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Panel administrativo privado de W.todocell.",
-  title: "Admin | W.todocell",
+  description: "Panel administrativo privado de VITA HOGAR.",
+  title: "Admin | VITA HOGAR",
 });
 
 function getMetadataText(
@@ -29,7 +29,7 @@ export default async function AdminLayout({ children }: AdminLayoutProps) {
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
   const roleLabel = getRoleLabel(role);
 
   return (

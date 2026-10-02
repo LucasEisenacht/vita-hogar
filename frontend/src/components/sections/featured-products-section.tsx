@@ -22,7 +22,7 @@ export async function FeaturedProductsSection() {
             Elegidos para vos
           </h2>
           <p className="text-base leading-7 text-muted-foreground">
-            Una selecci&oacute;n de accesorios que combinan dise&ntilde;o,
+            Una selecci&oacute;n de productos que combinan dise&ntilde;o,
             funcionalidad y estilo.
           </p>
         </div>

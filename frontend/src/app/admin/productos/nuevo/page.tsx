@@ -23,14 +23,14 @@ export default async function NewProductPage() {
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
 
   return (
     <div className="space-y-8">
       <AdminHeader
         eyebrow="Nuevo producto"
         roleLabel={getRoleLabel(role)}
-        subtitle="Carga fotos, datos comerciales y modelos disponibles en un flujo guiado."
+        subtitle="Carga fotos, datos comerciales y variantes disponibles en un flujo guiado."
         title="Agregar producto"
         userName={userName}
       />

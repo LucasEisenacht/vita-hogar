@@ -9,8 +9,8 @@ import { getHomeContentConfigResult } from "@/lib/home-content/config";
 import { createNoIndexMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Gestion de contenido de la portada de W.todocell.",
-  title: "Contenido | W.todocell Admin",
+  description: "Gestion de contenido de la portada de VITA HOGAR.",
+  title: "Contenido | VITA HOGAR Admin",
 });
 
 function getMetadataText(
@@ -30,7 +30,7 @@ export default async function AdminContentPage() {
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
   const roleLabel = getRoleLabel(role);
 
   return (

@@ -173,15 +173,8 @@ before insert or update on public.products
 for each row
 execute function public.set_product_audit_fields();
 
-insert into public.categories (name, slug, description, sort_order)
-values
-  ('Fundas', 'fundas', 'Fundas suaves y modernas para proteger el celular con estilo.', 10),
-  ('Audio', 'audio', 'Auriculares y parlantes pensados para acompanar todos los dias.', 20),
-  ('Carga', 'carga', 'Cargadores, cables y bases para una rutina mas simple.', 30),
-  ('Gaming', 'gaming', 'Accesorios comodos para jugar con una estetica cuidada.', 40),
-  ('Smart', 'smart', 'Detalles inteligentes para sumar funcionalidad diaria.', 50)
-on conflict (slug) do nothing;
-
+-- Business categories are intentionally loaded only after VITA HOGAR defines
+-- its real catalog. A clean schema installation must not invent catalog data.
 revoke execute on function public.set_catalog_updated_at() from public;
 revoke execute on function public.set_catalog_updated_at() from anon;
 revoke execute on function public.set_catalog_updated_at() from authenticated;

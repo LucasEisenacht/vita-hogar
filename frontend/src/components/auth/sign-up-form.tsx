@@ -136,7 +136,7 @@ export function SignUpForm({ redirectTo = "/mi-cuenta" }: SignUpFormProps) {
             Revis&aacute; tu correo
           </h2>
           <p className="text-sm leading-6 text-muted-foreground">
-            Te enviamos un enlace para confirmar tu cuenta en W.todocell.
+            Te enviamos un enlace para confirmar tu cuenta en VITA HOGAR.
           </p>
         </div>
         <Link
@@ -219,7 +219,7 @@ export function SignUpForm({ redirectTo = "/mi-cuenta" }: SignUpFormProps) {
           type="checkbox"
         />
         <span>
-          Quiero recibir novedades, lanzamientos y promociones de W.todocell.
+          Quiero recibir novedades, lanzamientos y promociones de VITA HOGAR.
         </span>
       </label>
       {errors.form ? (

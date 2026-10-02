@@ -4,7 +4,7 @@
 -- This migration is intentionally additive and does not recreate orders, orders
 -- data, outbox data, functions, or triggers.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 alter table public.orders
   add column if not exists confirmation_token_hash text,
@@ -13,14 +13,14 @@ alter table public.orders
 
 alter table public.orders
   alter column confirmation_token_hash
-  set default encode(digest(encode(gen_random_bytes(24), 'hex'), 'sha256'), 'hex');
+  set default encode(extensions.digest(encode(extensions.gen_random_bytes(24), 'hex'), 'sha256'), 'hex');
 
 alter table public.orders
   alter column confirmation_token_secret_version
   set default 1;
 
 update public.orders
-set confirmation_token_hash = encode(digest(encode(gen_random_bytes(24), 'hex'), 'sha256'), 'hex')
+set confirmation_token_hash = encode(extensions.digest(encode(extensions.gen_random_bytes(24), 'hex'), 'sha256'), 'hex')
 where confirmation_token_hash is null;
 
 update public.orders

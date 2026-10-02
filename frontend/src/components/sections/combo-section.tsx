@@ -16,7 +16,7 @@ export function ComboSection() {
                 Arm&aacute; tu combo
               </h2>
               <p className="text-base leading-7 text-muted-foreground">
-                Combin&aacute; tus accesorios favoritos y llev&aacute; todo lo
+                Combin&aacute; tus productos favoritos y llev&aacute; todo lo
                 que necesit&aacute;s.
               </p>
               <Link

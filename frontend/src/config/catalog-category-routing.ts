@@ -1,9 +1,7 @@
 import { normalizeProductColorName } from "@/lib/catalog/product-colors";
 import { normalizeCatalogCategorySlug } from "@/lib/catalog/routes";
 
-const categoryRouteAliases: Record<string, Array<string>> = {
-  consolas: ["consolas", "gaming"],
-};
+const categoryRouteAliases: Record<string, Array<string>> = {};
 
 export function getCatalogCategoryRouteSlugs(categorySlug: string) {
   const normalizedSlug = normalizeProductColorName(

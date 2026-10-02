@@ -66,7 +66,7 @@ export function renderPaymentConfirmedEmail(
     }),
     subject: `Pago confirmado - pedido ${payload.orderNumber}`,
     text: [
-      "W.todocell - Pago confirmado",
+      "VITA HOGAR - Pago confirmado",
       greeting,
       `Ya verificamos tu pago y comenzaremos a preparar el pedido ${payload.orderNumber}.`,
       `Total confirmado: ${formatCurrency(payload.total)}`,

@@ -133,13 +133,6 @@ function getCreateProductDatabaseErrorState(
     return getProductFieldErrorState("slug", "El slug ya esta siendo utilizado.");
   }
 
-  if (message.includes("active_case_requires_model_variants")) {
-    return getProductFieldErrorState(
-      "modelVariants",
-      "Agrega al menos un modelo disponible para una funda activa.",
-    );
-  }
-
   if (
     error.code === "23503" ||
     message.includes("products_category_id_fkey")
@@ -302,7 +295,7 @@ function getCaseModelVariantErrorState(error: CatalogDatabaseError) {
   if (error.code === "23514") {
     return getProductFieldErrorState(
       "modelVariants",
-      "Revisa marca, modelo y stock de los modelos disponibles.",
+      "Revisa marca, modelo y stock de las variantes disponibles.",
     );
   }
 
@@ -312,12 +305,12 @@ function getCaseModelVariantErrorState(error: CatalogDatabaseError) {
     message.includes("permission denied")
   ) {
     return getProductErrorState(
-      "No tenes permisos de base de datos para guardar modelos disponibles.",
+      "No tenes permisos de base de datos para guardar variantes disponibles.",
     );
   }
 
   return getProductErrorState(
-    "No pudimos guardar los modelos disponibles. Revisa los datos e intenta nuevamente.",
+    "No pudimos guardar las variantes disponibles. Revisa los datos e intenta nuevamente.",
   );
 }
 
@@ -446,20 +439,6 @@ export async function createProduct(
     };
   }
 
-  if (
-    category.slug === "fundas" &&
-    validation.data.is_active &&
-    validation.data.modelVariants.length === 0
-  ) {
-    return {
-      fieldErrors: {
-        modelVariants:
-          "Agrega al menos un modelo disponible para una funda activa.",
-      },
-      status: "error",
-    };
-  }
-
   if (await slugExists(validation.data.slug)) {
     return {
       fieldErrors: {
@@ -532,20 +511,6 @@ export async function updateProduct(
     return {
       fieldErrors: {
         categoryId: "Selecciona una categoria valida.",
-      },
-      status: "error",
-    };
-  }
-
-  if (
-    category.slug === "fundas" &&
-    validation.data.is_active &&
-    validation.data.modelVariants.length === 0
-  ) {
-    return {
-      fieldErrors: {
-        modelVariants:
-          "Agrega al menos un modelo disponible para una funda activa.",
       },
       status: "error",
     };

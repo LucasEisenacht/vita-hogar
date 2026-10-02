@@ -7,7 +7,7 @@ export default function ActualizarContrasenaPage() {
       description={
         <>
           Eleg&iacute; una nueva contrase&ntilde;a para seguir usando tu cuenta de
-          W.todocell.
+          VITA HOGAR.
         </>
       }
       title={<>Actualizar contrase&ntilde;a</>}

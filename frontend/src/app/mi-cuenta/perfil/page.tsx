@@ -7,8 +7,8 @@ import { Container } from "@/components/ui/container";
 import { getCurrentAccountProfile } from "@/lib/account/profile";
 
 export const metadata: Metadata = {
-  description: "Edita tus datos personales en W.todocell.",
-  title: "Mi perfil | W.todocell",
+  description: "Edita tus datos personales en VITA HOGAR.",
+  title: "Mi perfil | VITA HOGAR",
 };
 
 export default async function AccountProfilePage() {

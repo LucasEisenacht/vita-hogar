@@ -309,7 +309,7 @@ export default async function MiCuentaPage({
     },
     {
       description: isNewsletterSubscribed ? (
-        <>Recib&iacute;s novedades y promociones de W.todocell.</>
+        <>Recib&iacute;s novedades y promociones de VITA HOGAR.</>
       ) : (
         <>Podr&aacute;s activar las novedades m&aacute;s adelante.</>
       ),
@@ -356,7 +356,7 @@ export default async function MiCuentaPage({
       title: "Mis direcciones",
     },
     {
-      description: `Reuni tus accesorios favoritos para volver a encontrarlos facil. ${counts.favorites} favoritos guardados.`,
+      description: `Reuni tus productos favoritos para volver a encontrarlos facil. ${counts.favorites} favoritos guardados.`,
       href: "/mi-cuenta/favoritos",
       icon: <HeartMark className="h-5 w-5" />,
       title: "Favoritos",
@@ -437,7 +437,7 @@ export default async function MiCuentaPage({
             <CardContent className="p-6 sm:p-8 lg:p-9">
               <div className="flex flex-col gap-5 border-b border-border/70 pb-6 sm:flex-row sm:items-start sm:justify-between">
                 <div className="space-y-3">
-                  <Badge variant="new">Cliente W.todocell</Badge>
+                  <Badge variant="new">Cliente VITA HOGAR</Badge>
                   {canAccessAdmin ? (
                     <Badge variant="neutral">{getRoleLabel(currentRole)}</Badge>
                   ) : null}

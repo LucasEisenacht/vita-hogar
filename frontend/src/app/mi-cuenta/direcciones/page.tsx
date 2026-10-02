@@ -17,8 +17,8 @@ type AccountAddressesPageProps = {
 };
 
 export const metadata: Metadata = {
-  description: "Direcciones guardadas de tu cuenta en W.todocell.",
-  title: "Mis direcciones | W.todocell",
+  description: "Direcciones guardadas de tu cuenta en VITA HOGAR.",
+  title: "Mis direcciones | VITA HOGAR",
 };
 
 function getStatus(value?: string | string[]) {

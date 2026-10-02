@@ -74,7 +74,7 @@ export default async function EditProductPage({
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
   const productAction = updateProduct.bind(null, product.id);
   const deleteAction = deleteProduct.bind(null, product.id);
   const statusMessage = getStatusMessage(queryParams?.status);

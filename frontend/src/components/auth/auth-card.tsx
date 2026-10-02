@@ -14,7 +14,7 @@ type AuthCardProps = {
 export function AuthCard({
   children,
   description,
-  eyebrow = "W.todocell",
+  eyebrow = "VITA HOGAR",
   title,
 }: AuthCardProps) {
   return (

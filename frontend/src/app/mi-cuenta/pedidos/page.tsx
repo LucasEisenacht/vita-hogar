@@ -8,8 +8,8 @@ import { EmptyState } from "@/components/shared/empty-state";
 import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = {
-  description: "Pedidos de tu cuenta en W.todocell.",
-  title: "Mis pedidos | W.todocell",
+  description: "Pedidos de tu cuenta en VITA HOGAR.",
+  title: "Mis pedidos | VITA HOGAR",
 };
 
 export default async function AccountOrdersPage() {

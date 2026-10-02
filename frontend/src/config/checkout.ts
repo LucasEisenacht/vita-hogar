@@ -130,7 +130,7 @@ export const checkoutHelpText = {
   accountHint:
     "Ya tenes cuenta? Inicia sesion para completar tus datos y consultar el pedido despues.",
   confirmationIntro:
-    "Recibimos tu pedido. El equipo de W.todocell va a revisar el pago y coordinar la entrega por WhatsApp.",
+    "Recibimos tu pedido. El equipo de VITA HOGAR va a revisar el pago y coordinar la entrega por WhatsApp.",
   whatsappCta: "Enviar comprobante por WhatsApp",
 } as const;
 

@@ -80,7 +80,7 @@ const steps: Array<{ id: ProductStepId; label: string; number: number }> = [
   { id: "photos", label: "Fotos", number: 1 },
   { id: "info", label: "Informacion", number: 2 },
   { id: "price", label: "Precio", number: 3 },
-  { id: "compatibility", label: "Compatibilidad", number: 4 },
+  { id: "compatibility", label: "Variantes y opciones", number: 4 },
   { id: "publish", label: "Publicar", number: 5 },
 ];
 
@@ -652,10 +652,10 @@ export function ProductForm({
     (category) => category.id === selectedCategoryId,
   );
   const selectedCategorySlug = selectedCategory?.slug ?? product?.category?.slug;
-  const isCaseCategory = selectedCategorySlug === "fundas";
+  const supportsModelVariants = Boolean(selectedCategorySlug);
   const categoryConfig = getProductCategoryFormConfig(selectedCategorySlug);
   const fieldErrors = useMemo(() => state.fieldErrors ?? {}, [state.fieldErrors]);
-  const usesModelVariantStock = isCaseCategory && modelVariantRows.length > 0;
+  const usesModelVariantStock = modelVariantRows.length > 0;
   const modelVariantStockTotal = modelVariantRows.reduce((total, row) => {
     const stockValue = Number(row.stock);
 
@@ -859,15 +859,7 @@ export function ProductForm({
   }
 
   function handleCategoryChange(nextCategoryId: string) {
-    const nextCategory = categories.find(
-      (category) => category.id === nextCategoryId,
-    );
-
     setSelectedCategoryId(nextCategoryId);
-
-    if (nextCategory?.slug === "fundas" && modelVariantRows.length === 0) {
-      setModelVariantRows([createEmptyModelVariantRow()]);
-    }
   }
 
   function updateModelVariantRow(
@@ -968,19 +960,19 @@ export function ProductForm({
       }
     }
 
-    if (currentStepId === "compatibility" && isCaseCategory) {
+    if (currentStepId === "compatibility" && modelVariantRows.length > 0) {
       const hasIncompleteRow = modelVariantRows.some((row) => {
         return (
           row.brand.trim() ||
           row.model.trim() ||
           row.colorName.trim() ||
           row.stock.trim()
-        ) && (!row.brand.trim() || !row.model.trim() || !row.colorName.trim());
+        ) && (!row.brand.trim() || !row.model.trim());
       });
 
       if (hasIncompleteRow) {
         nextErrors.compatibility =
-          "Completa marca, modelo y color en cada combinacion cargada.";
+          "Completa marca y modelo en cada variante cargada.";
       }
     }
 
@@ -1276,7 +1268,7 @@ export function ProductForm({
                 maxLength={120}
                 name="name"
                 onChange={(event) => handleNameChange(event.target.value)}
-                placeholder="Funda Labubu rosa pastel"
+                placeholder="Nombre del producto"
                 required
                 value={name}
               />
@@ -1302,7 +1294,7 @@ export function ProductForm({
                 error={fieldErrors.brand}
                 label="Marca"
                 name="brand"
-                placeholder="Apple, Samsung, W.todocell"
+                placeholder="Marca del producto"
                 defaultValue={product?.brand ?? ""}
               />
               <SelectField
@@ -1323,7 +1315,7 @@ export function ProductForm({
             <TextareaField
               defaultValue={product?.description}
               error={fieldErrors.description}
-              helperText="Describe el estilo, materiales, compatibilidad general y detalles que ayuden a vender."
+              helperText="Describe el estilo, materiales, variantes y detalles que ayuden a vender."
               label="Descripcion"
               name="description"
               rows={7}
@@ -1429,7 +1421,7 @@ export function ProductForm({
                 error={fieldErrors.stock}
                 helperText={
                   usesModelVariantStock
-                    ? "Se calcula automaticamente con los modelos disponibles."
+                    ? "Se calcula automaticamente con las variantes disponibles."
                     : "Numero entero, sin negativos."
                 }
                 label="Stock"
@@ -1449,17 +1441,17 @@ export function ProductForm({
         <div className={isWizardMode ? (currentStep === 3 ? "block" : "hidden") : "block"}>
           <WizardPanel
             description={categoryConfig.description}
-            title="Compatibilidad"
+            title="Variantes y opciones"
           >
-            {isCaseCategory ? (
+            {supportsModelVariants ? (
               <div className="space-y-5">
                 <div className="flex flex-col gap-3 rounded-[24px] border border-primary/20 bg-secondary/45 p-5 sm:flex-row sm:items-center sm:justify-between">
                   <div>
                     <p className="font-display text-xl font-semibold text-foreground">
-                      Modelos disponibles
+                      Variantes disponibles
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      {selectedModelCount} modelos / {selectedCombinationCount} combinaciones.
+                      {selectedModelCount} variantes / {selectedCombinationCount} combinaciones.
                     </p>
                   </div>
                   <div className="rounded-full bg-surface px-4 py-2 text-sm font-semibold text-primary-hover">
@@ -1477,10 +1469,10 @@ export function ProductForm({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="font-semibold text-foreground">
-                        Generar matriz modelo + color
+                        Generar matriz variante + color
                       </p>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Usa los modelos cargados y los colores del campo Colores. Conserva el stock existente.
+                        Usa las variantes cargadas y los colores del campo Colores. Conserva el stock existente.
                       </p>
                     </div>
                     <Button
@@ -1531,7 +1523,7 @@ export function ProductForm({
                             event.target.value,
                           )
                         }
-                        placeholder="Apple, Samsung"
+                        placeholder="Marca"
                         value={row.brand}
                       />
                       <Input
@@ -1544,7 +1536,7 @@ export function ProductForm({
                             event.target.value,
                           )
                         }
-                        placeholder="iPhone 16 Pro"
+                        placeholder="Modelo"
                         value={row.model}
                       />
                       <Input
@@ -1576,7 +1568,7 @@ export function ProductForm({
                         value={row.stock}
                       />
                       <button
-                        aria-label={`Quitar modelo ${
+                        aria-label={`Quitar variante ${
                           row.brand || row.model || index + 1
                         }`}
                         className="h-12 rounded-full border border-border px-4 text-sm font-semibold text-muted-foreground transition-all duration-[250ms] hover:-translate-y-0.5 hover:border-destructive/35 hover:bg-[#fff1f2] hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0 lg:mt-7"
@@ -1600,16 +1592,16 @@ export function ProductForm({
                   type="button"
                   variant="secondary"
                 >
-                  + Agregar modelo
+                  + Agregar variante
                 </Button>
               </div>
             ) : (
               <div className="rounded-[24px] border border-border bg-surface-soft p-5">
                 <p className="font-display text-xl font-semibold text-foreground">
-                  Este producto no requiere compatibilidad con modelos
+                  Este producto no requiere variantes especificas
                 </p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Si la categoria lo permite, podes cargar compatibilidades y
+                  Si corresponde, podes cargar opciones, compatibilidades y
                   colores como informacion comercial adicional.
                 </p>
               </div>
@@ -1622,7 +1614,7 @@ export function ProductForm({
                 label="Compatibilidades"
                 name="compatibility"
                 onChange={(event) => setCompatibilityText(event.target.value)}
-                placeholder="iPhone 16 Pro Max, iPhone 16 Pro"
+                placeholder="Separadas por coma"
                 value={compatibilityText}
               />
               <Input
@@ -1721,7 +1713,7 @@ export function ProductForm({
                     profit === null ? "Pendiente" : formatAdminCurrency(profit),
                   ],
                   ["Stock", `${visibleStock} unidades`],
-                  ["Modelos compatibles", String(selectedModelCount)],
+                  ["Variantes cargadas", String(selectedModelCount)],
                   [
                     "Estado final",
                     publicationState === "published" ? "Publicado" : "Borrador",

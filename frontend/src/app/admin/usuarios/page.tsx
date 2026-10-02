@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     follow: false,
     index: false,
   },
-  title: "Usuarios | Admin W.todocell",
+  title: "Usuarios | Admin VITA HOGAR",
 };
 
 function getSearchParam(value?: string | string[]) {
@@ -272,7 +272,7 @@ export default async function AdminUsersPage({
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
 
   return (
     <div className="space-y-8">

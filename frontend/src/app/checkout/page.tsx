@@ -5,8 +5,8 @@ import { createNoIndexMetadata } from "@/lib/seo/metadata";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Checkout privado de W.todocell.",
-  title: "Checkout | W.todocell",
+  description: "Checkout privado de VITA HOGAR.",
+  title: "Checkout | VITA HOGAR",
 });
 
 function getMetadataText(

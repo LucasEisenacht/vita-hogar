@@ -114,7 +114,7 @@ export default async function AdminPage({ searchParams }: AdminPageProps) {
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
   const roleLabel = getRoleLabel(role);
 
   return (

@@ -5,7 +5,7 @@
 -- This migration is additive/idempotent for data and does not recreate orders,
 -- delete orders, or enqueue historical emails.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 alter table public.orders
   add column if not exists customer_first_name text,
@@ -28,7 +28,7 @@ set
   customer_last_name = coalesce(
     nullif(customer_last_name, ''),
     nullif(btrim(regexp_replace(btrim(customer_name), '^\S+\s*', '')), ''),
-    'W.todocell'
+    'Sin apellido'
   ),
   payment_method = coalesce(nullif(payment_method, ''), 'bank_transfer'),
   payment_status = coalesce(nullif(payment_status, ''), 'pending'),
@@ -506,7 +506,7 @@ begin
   into order_record
   from public.orders
   where order_number = btrim(order_number_value)
-    and confirmation_token_hash = encode(digest(btrim(confirmation_token_value), 'sha256'), 'hex');
+    and confirmation_token_hash = encode(extensions.digest(btrim(confirmation_token_value), 'sha256'), 'hex');
 
   if not found then
     return null;

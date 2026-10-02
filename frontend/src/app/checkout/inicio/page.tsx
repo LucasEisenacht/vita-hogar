@@ -9,8 +9,8 @@ import { createNoIndexMetadata } from "@/lib/seo/metadata";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Elegir como continuar la compra en W.todocell.",
-  title: "Continuar compra | W.todocell",
+  description: "Elegir como continuar la compra en VITA HOGAR.",
+  title: "Continuar compra | VITA HOGAR",
 });
 
 const checkoutReturnPath = "/checkout";
@@ -58,7 +58,7 @@ export default async function CheckoutStartPage() {
         <div className="mx-auto max-w-5xl space-y-8">
           <div className="max-w-3xl space-y-3">
             <p className="font-display text-sm font-semibold uppercase tracking-[0.18em] text-primary-hover">
-              W.todocell
+              VITA HOGAR
             </p>
             <h1 className="font-display text-4xl font-semibold text-foreground sm:text-5xl">
               Como queres continuar?

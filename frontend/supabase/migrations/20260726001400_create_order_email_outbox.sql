@@ -288,7 +288,7 @@ begin
   into order_record
   from public.orders
   where order_number = btrim(order_number_value)
-    and confirmation_token_hash = encode(digest(btrim(confirmation_token_value), 'sha256'), 'hex');
+    and confirmation_token_hash = encode(extensions.digest(btrim(confirmation_token_value), 'sha256'), 'hex');
 
   if not found then
     return null;

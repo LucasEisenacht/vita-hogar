@@ -20,7 +20,7 @@ import {
 } from "@/lib/email/templates/shared";
 
 const nextSteps = [
-  "Tu pedido ya salio de W.todocell.",
+  "Tu pedido ya salio de VITA HOGAR.",
   "Te vamos a acompanar si necesitas coordinar algun detalle.",
   "Guardaremos el historial del pedido para cualquier consulta.",
 ];
@@ -61,7 +61,7 @@ export function renderOrderShippedEmail(
     }),
     subject: `Tu pedido ${payload.orderNumber} fue despachado`,
     text: [
-      "W.todocell - Pedido despachado",
+      "VITA HOGAR - Pedido despachado",
       greeting,
       `El pedido ${payload.orderNumber} ya esta en camino o listo para coordinar segun el metodo de entrega elegido.`,
       getOrderMetaLines(payload).join("\n"),

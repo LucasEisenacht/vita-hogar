@@ -259,7 +259,7 @@ export async function getAdminProductById(
     .order("model", { ascending: true });
 
   if (modelVariantsError) {
-    throw new Error("No pudimos cargar los modelos disponibles.");
+    throw new Error("No pudimos cargar las variantes disponibles.");
   }
 
   return attachCategories(

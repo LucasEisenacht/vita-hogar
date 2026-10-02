@@ -30,8 +30,8 @@ type ConfirmationPageProps = {
 };
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Confirmacion privada del pedido en W.todocell.",
-  title: "Pedido recibido | W.todocell",
+  description: "Confirmacion privada del pedido en VITA HOGAR.",
+  title: "Pedido recibido | VITA HOGAR",
 });
 
 function buildWhatsAppMessage(orderNumber: string) {

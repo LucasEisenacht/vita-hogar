@@ -91,7 +91,7 @@ function getFixturePayload(eventType) {
   return {
     buyerType: "guest",
     confirmationUrl:
-      "https://www.wtodocell.com.ar/checkout/confirmacion/WT-2026-000005?token=preview-token",
+      "https://vita-hogar.vercel.app/checkout/confirmacion/WT-2026-000005?token=preview-token",
     createdAt,
     currency: "ARS",
     customerEmail: "lucas.preview@example.com",

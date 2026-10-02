@@ -32,7 +32,7 @@ export function renderOrderDeliveredEmail(
       ${escapeHtml(greeting)}
     </p>
     <p style="margin:8px 0 0;color:#765c66;font-size:15px;line-height:1.75;">
-      Gracias por elegir W.todocell. Esperamos que disfrutes tu pedido ${escapeHtml(payload.orderNumber)}.
+      Gracias por elegir VITA HOGAR. Esperamos que disfrutes tu pedido ${escapeHtml(payload.orderNumber)}.
     </p>
     ${renderOrderMetaGrid(payload)}
     ${renderStatusTimeline({ activeStep: "delivered" })}
@@ -56,7 +56,7 @@ export function renderOrderDeliveredEmail(
     </div>
     ${renderSupportBlock(payload)}
     <p style="margin:24px 0 0;color:#987582;font-size:14px;line-height:1.7;">
-      Gracias por elegir W.todocell.
+      Gracias por elegir VITA HOGAR.
     </p>
   `;
 
@@ -67,9 +67,9 @@ export function renderOrderDeliveredEmail(
     }),
     subject: `¡Tu pedido ${payload.orderNumber} fue entregado!`,
     text: [
-      "W.todocell - Pedido entregado",
+      "VITA HOGAR - Pedido entregado",
       greeting,
-      `Gracias por elegir W.todocell. Esperamos que disfrutes tu pedido ${payload.orderNumber}.`,
+      `Gracias por elegir VITA HOGAR. Esperamos que disfrutes tu pedido ${payload.orderNumber}.`,
       getOrderMetaLines(payload).join("\n"),
       "Estado: Pedido recibido -> Pago confirmado -> Preparacion -> Entrega completada",
       renderTextOrderItems(payload),
@@ -77,7 +77,7 @@ export function renderOrderDeliveredEmail(
       orderUrl ? `Ver mi pedido: ${orderUrl}` : "",
       `Instagram: ${instagramUrl}`,
       "Si tenes cualquier inconveniente, escribinos por WhatsApp.",
-      "Gracias por elegir W.todocell.",
+      "Gracias por elegir VITA HOGAR.",
     ]
       .filter(Boolean)
       .join("\n\n"),

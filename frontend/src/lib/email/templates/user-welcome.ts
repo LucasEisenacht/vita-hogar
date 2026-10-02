@@ -39,7 +39,7 @@ export function renderUserWelcomeEmail(
   const accountUrl = getAuthAccountUrl();
   const shopUrl = getAuthShopUrl();
   const whatsappUrl = getAuthWhatsAppUrl(
-    "Hola W.todocell, tengo una consulta sobre mi cuenta.",
+    "Hola VITA HOGAR, tengo una consulta sobre mi cuenta.",
   );
   const greeting = firstName
     ? `Hola ${firstName}, tu cuenta ya está lista.`
@@ -78,18 +78,18 @@ export function renderUserWelcomeEmail(
       </p>
     </div>
     <p style="margin:24px 0 0;color:#987582;font-size:14px;line-height:1.7;">
-      Gracias por ser parte de W.todocell.
+      Gracias por ser parte de VITA HOGAR.
     </p>
   `;
 
   return {
     html: renderAuthEmailShell({
       body,
-      preview: "Tu cuenta de W.todocell ya esta lista.",
+      preview: "Tu cuenta de VITA HOGAR ya esta lista.",
     }),
-    subject: "¡Bienvenido a W.todocell!",
+    subject: "¡Bienvenido a VITA HOGAR!",
     text: [
-      "W.todocell - Cuenta confirmada",
+      "VITA HOGAR - Cuenta confirmada",
       firstName
         ? `Hola ${firstName}, tu cuenta ya está lista.`
         : "Tu cuenta ya está lista.",
@@ -99,7 +99,7 @@ export function renderUserWelcomeEmail(
       `Explorar productos: ${shopUrl}`,
       `WhatsApp: ${whatsappUrl}`,
       `Instagram: ${siteConfig.instagram.url}`,
-      "Gracias por ser parte de W.todocell.",
+      "Gracias por ser parte de VITA HOGAR.",
     ].join("\n\n"),
   };
 }

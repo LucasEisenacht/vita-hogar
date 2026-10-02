@@ -13,7 +13,7 @@ type AccountOrderDetailPageProps = {
 };
 
 export const metadata: Metadata = {
-  title: "Detalle del pedido | W.todocell",
+  title: "Detalle del pedido | VITA HOGAR",
 };
 
 export default async function AccountOrderDetailPage({

@@ -84,7 +84,7 @@ function parseEmailFrom(value: string | undefined, missingErrorCode: string) {
 
   return {
     fromAddress: normalizeEmail(normalizedValue, "invalid_from_email"),
-    fromName: "W.todocell",
+    fromName: "VITA HOGAR",
   };
 }
 

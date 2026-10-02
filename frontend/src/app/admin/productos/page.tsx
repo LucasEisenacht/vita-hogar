@@ -117,7 +117,7 @@ export default async function AdminProductsPage({
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
-    [firstName, lastName].filter(Boolean).join(" ") || "Equipo W.todocell";
+    [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
   const activeCount = products.filter((product) => product.is_active).length;
   const featuredCount = products.filter((product) => product.is_featured).length;
   const outOfStockCount = products.filter(
@@ -130,7 +130,7 @@ export default async function AdminProductsPage({
       <AdminHeader
         eyebrow="Catalogo"
         roleLabel={getRoleLabel(role)}
-        subtitle="Desde aca vas a poder cargar, editar y organizar el catalogo de W.todocell."
+        subtitle="Desde aca vas a poder cargar, editar y organizar el catalogo de VITA HOGAR."
         title="Productos"
         userName={userName}
       />

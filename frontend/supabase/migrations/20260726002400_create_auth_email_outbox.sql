@@ -2,7 +2,7 @@
 -- This does not send emails directly from SQL and does not enqueue historical
 -- users. It only creates rows for future confirmations.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create table if not exists public.auth_email_outbox (
   id uuid primary key default gen_random_uuid(),

@@ -142,27 +142,10 @@ set search_path = public
 as $$
 declare
   created_product_id uuid;
-  is_active_product boolean;
-  is_case_category boolean;
   variant_payload jsonb;
 begin
   if not (select public.has_admin_access()) then
     raise exception 'not_authorized' using errcode = '42501';
-  end if;
-
-  is_active_product := coalesce((product_payload ->> 'is_active')::boolean, false);
-
-  select exists (
-    select 1
-    from public.categories
-    where categories.id = nullif(product_payload ->> 'category_id', '')::uuid
-      and categories.slug = 'fundas'
-  )
-  into is_case_category;
-
-  if is_active_product and is_case_category and jsonb_array_length(coalesce(model_variants_payload, '[]'::jsonb)) = 0 then
-    raise exception 'active_case_requires_model_variants'
-      using detail = 'Active products in category fundas must include at least one model variant.';
   end if;
 
   insert into public.products (
@@ -272,27 +255,10 @@ security invoker
 set search_path = public
 as $$
 declare
-  is_active_product boolean;
-  is_case_category boolean;
   variant_payload jsonb;
 begin
   if not (select public.has_admin_access()) then
     raise exception 'not_authorized' using errcode = '42501';
-  end if;
-
-  is_active_product := coalesce((product_payload ->> 'is_active')::boolean, false);
-
-  select exists (
-    select 1
-    from public.categories
-    where categories.id = nullif(product_payload ->> 'category_id', '')::uuid
-      and categories.slug = 'fundas'
-  )
-  into is_case_category;
-
-  if is_active_product and is_case_category and jsonb_array_length(coalesce(model_variants_payload, '[]'::jsonb)) = 0 then
-    raise exception 'active_case_requires_model_variants'
-      using detail = 'Active products in category fundas must include at least one model variant.';
   end if;
 
   update public.products

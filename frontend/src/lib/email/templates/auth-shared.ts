@@ -101,7 +101,7 @@ export function renderAuthEmailShell({
             <tr>
               <td style="padding:20px 28px 26px;border-top:1px solid ${colors.border};background:#fff9f7;color:${colors.muted};font-size:12px;line-height:1.65;">
                 <strong style="color:${colors.foreground};">${escapeAuthEmailHtml(siteConfig.name)}</strong><br>
-                Accesorios que combinan con tu estilo.<br>
+                Gracias por elegirnos.<br>
                 ${escapeAuthEmailHtml(siteConfig.location.city)}, ${escapeAuthEmailHtml(siteConfig.location.province)}.
               </td>
             </tr>

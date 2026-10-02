@@ -47,7 +47,7 @@ function getExportFileName() {
     .replace(", ", "-")
     .replace(":", "");
 
-  return `wtodocell-pedidos-${timestamp}.csv`;
+  return `vita-hogar-pedidos-${timestamp}.csv`;
 }
 
 export async function GET(request: Request) {

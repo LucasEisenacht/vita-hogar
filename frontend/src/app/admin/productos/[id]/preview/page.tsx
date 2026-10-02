@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     follow: false,
     index: false,
   },
-  title: "Vista previa de producto | W.todocell Admin",
+  title: "Vista previa de producto | VITA HOGAR Admin",
 };
 
 type ProductPreviewPageProps = {

@@ -63,7 +63,7 @@ export function renderOrderReceivedEmail(
     }),
     subject: `¡Recibimos tu pedido ${payload.orderNumber}!`,
     text: [
-      `W.todocell - Pedido recibido`,
+      `VITA HOGAR - Pedido recibido`,
       greeting,
       `Recibimos tu pedido ${payload.orderNumber} y quedo pendiente mientras verificamos el pago.`,
       getOrderMetaLines(payload).join("\n"),

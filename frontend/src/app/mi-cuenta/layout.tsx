@@ -4,8 +4,8 @@ import { StorefrontPageShell } from "@/components/layout/storefront-page-shell";
 import { createNoIndexMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = createNoIndexMetadata({
-  description: "Area privada de clientas de W.todocell.",
-  title: "Mi cuenta | W.todocell",
+  description: "Area privada de clientes de VITA HOGAR.",
+  title: "Mi cuenta | VITA HOGAR",
 });
 
 export default function AccountLayout({ children }: { children: ReactNode }) {

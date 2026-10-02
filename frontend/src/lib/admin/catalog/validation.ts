@@ -286,13 +286,13 @@ function parseModelVariants(
     }
 
     if (!brand) {
-      fieldErrors.modelVariants = "La marca de cada modelo es obligatoria.";
+      fieldErrors.modelVariants = "La marca de cada variante es obligatoria.";
     } else if (brand.length > 80) {
       fieldErrors.modelVariants = "La marca debe tener hasta 80 caracteres.";
     }
 
     if (!model) {
-      fieldErrors.modelVariants = "El modelo de celular es obligatorio.";
+      fieldErrors.modelVariants = "El modelo de la variante es obligatorio.";
     } else if (model.length > 120) {
       fieldErrors.modelVariants = "El modelo debe tener hasta 120 caracteres.";
     }
@@ -307,7 +307,7 @@ function parseModelVariants(
 
     if (!stockText || !Number.isInteger(stock) || stock < 0) {
       fieldErrors.modelVariants =
-        "El stock de cada modelo debe ser un entero mayor o igual a 0.";
+        "El stock de cada variante debe ser un entero mayor o igual a 0.";
     }
 
     const colorKey = colorName ? normalizeProductColorName(colorName) : null;
@@ -365,10 +365,9 @@ export function validateProductForm(formData: FormData): ProductValidationResult
     requireText(formData, "slug", "Slug", fieldErrors),
   );
   const categoryId = normalizeOptionalText(formData.get("categoryId"));
-  const categorySlug = normalizeOptionalText(formData.get("categorySlug"));
   const isActive = parseBooleanInput(formData.get("isActive"));
   const modelVariants = parseModelVariants(formData, fieldErrors, {
-    requireColor: categorySlug === "fundas",
+    requireColor: false,
   });
 
   if (!categoryId) {
@@ -456,11 +455,6 @@ export function validateProductForm(formData: FormData): ProductValidationResult
   if (previousPrice !== null && priceValue !== null && previousPrice <= priceValue) {
     fieldErrors.previousPrice =
       "El precio anterior debe ser mayor que el precio actual.";
-  }
-
-  if (categorySlug === "fundas" && isActive && modelVariants.length === 0) {
-    fieldErrors.modelVariants =
-      "Agrega al menos un modelo disponible para una funda activa.";
   }
 
   if (

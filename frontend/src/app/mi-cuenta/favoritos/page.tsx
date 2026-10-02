@@ -9,8 +9,8 @@ import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = {
   description:
-    "Productos guardados por la clienta en su cuenta de W.todocell.",
-  title: "Mis favoritos | W.todocell",
+    "Productos guardados en tu cuenta de VITA HOGAR.",
+  title: "Mis favoritos | VITA HOGAR",
 };
 
 export default async function AccountFavoritesPage() {
@@ -34,7 +34,7 @@ export default async function AccountFavoritesPage() {
             Mis favoritos
           </h1>
           <p className="text-base leading-8 text-muted-foreground sm:text-lg">
-            Guard&aacute; los accesorios que te gustan para volver a encontrarlos
+            Guard&aacute; los productos que te gustan para volver a encontrarlos
             con calma.
           </p>
           <p className="text-sm font-medium text-muted-foreground">

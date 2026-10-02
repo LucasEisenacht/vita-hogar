@@ -1,7 +1,7 @@
 -- Real checkout order flow: guest-safe confirmation, idempotency, payments and variant stock.
 -- This migration replaces the draft checkout migration before it was applied anywhere.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create sequence if not exists public.order_number_sequence;
 
@@ -63,7 +63,7 @@ alter table public.orders
   add column if not exists shipping_address jsonb,
   add column if not exists shipping_cost_status text not null default 'fixed',
   add column if not exists admin_notes text,
-  add column if not exists confirmation_token_hash text not null default encode(digest(encode(gen_random_bytes(24), 'hex'), 'sha256'), 'hex'),
+  add column if not exists confirmation_token_hash text not null default encode(extensions.digest(encode(extensions.gen_random_bytes(24), 'hex'), 'sha256'), 'hex'),
   add column if not exists confirmation_token_secret_version integer not null default 1,
   add column if not exists idempotency_key text,
   add column if not exists paid_at timestamptz,
@@ -95,14 +95,14 @@ set
   customer_last_name = coalesce(
     nullif(customer_last_name, ''),
     nullif(btrim(regexp_replace(coalesce(customer_name, ''), '^\S+\s*', '')), ''),
-    'W.todocell'
+    'Sin apellido'
   ),
-  customer_email = coalesce(nullif(customer_email, ''), 'sin-email@wtodocell.local'),
+  customer_email = coalesce(nullif(customer_email, ''), 'sin-email@example.invalid'),
   customer_name = coalesce(
     nullif(customer_name, ''),
     btrim(
       coalesce(nullif(customer_first_name, ''), 'Cliente') || ' ' ||
-      coalesce(nullif(customer_last_name, ''), 'W.todocell')
+      coalesce(nullif(customer_last_name, ''), 'Sin apellido')
     )
   ),
   payment_status = case status
@@ -243,7 +243,7 @@ begin
   into order_record
   from public.orders
   where order_number = btrim(order_number_value)
-    and confirmation_token_hash = encode(digest(btrim(confirmation_token_value), 'sha256'), 'hex');
+    and confirmation_token_hash = encode(extensions.digest(btrim(confirmation_token_value), 'sha256'), 'hex');
 
   if not found then
     return null;
@@ -436,7 +436,7 @@ begin
 
   shipping_cost_value := case when delivery_method_value = 'amba_courier' then 5000 else 0 end;
   shipping_cost_status_value := case when delivery_method_value = 'nationwide_shipping' then 'to_be_confirmed' else 'fixed' end;
-  confirmation_token_hash_value := encode(digest(confirmation_token_value, 'sha256'), 'hex');
+  confirmation_token_hash_value := encode(extensions.digest(confirmation_token_value, 'sha256'), 'hex');
 
   perform pg_advisory_xact_lock(hashtextextended(idempotency_key_value, 0));
 
