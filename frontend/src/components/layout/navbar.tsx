@@ -35,6 +35,9 @@ const exploreLinks = [
   { href: "/tienda?disponibilidad=in_stock", label: "En stock", detail: "Disponible para comprar ahora." },
 ];
 
+const dropdownTriggerClassName =
+  "vita-explore-trigger inline-flex h-11 items-center justify-center gap-1 px-3 text-sm font-semibold leading-none text-secondary transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
 function SearchIcon(props: IconProps) {
   return <svg aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24" {...props}><circle cx="11" cy="11" r="6.25" /><path d="m16 16 4 4" strokeLinecap="round" /></svg>;
 }
@@ -78,22 +81,23 @@ export function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const { openMiniCart, totalItems } = useCart();
   const { optimisticWishlistCount } = useExperience();
   const accountHref = isAuthenticated ? "/mi-cuenta" : "/ingresar";
-  const menuId = useId();
+  const categoriesMenuId = useId();
+  const exploreMenuId = useId();
   const mobileDialogRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const isAdminPath = pathname.startsWith("/admin");
-  const categoryExploreLinks = categories.map((category) => ({
+  const categoryLinks = categories.map((category) => ({
     detail: category.description || "Ver productos de esta categoría.",
     href: getCatalogCategoryHref(category.slug),
     label: category.name,
   }));
-  const navigationExploreLinks = [...categoryExploreLinks, ...exploreLinks];
 
 
   useEffect(() => {
@@ -125,15 +129,22 @@ export function Navbar({
   }, [isMobileOpen]);
 
   useEffect(() => {
-    if (!isExploreOpen) return;
+    if (!isCategoriesOpen && !isExploreOpen) return;
     const closeOnEscapeOrOutside = (event: KeyboardEvent | PointerEvent) => {
-      if (event instanceof KeyboardEvent && event.key === "Escape") { setIsExploreOpen(false); return; }
-      if (event instanceof PointerEvent && !headerRef.current?.contains(event.target as Node)) setIsExploreOpen(false);
+      if (event instanceof KeyboardEvent && event.key === "Escape") {
+        setIsCategoriesOpen(false);
+        setIsExploreOpen(false);
+        return;
+      }
+      if (event instanceof PointerEvent && !headerRef.current?.contains(event.target as Node)) {
+        setIsCategoriesOpen(false);
+        setIsExploreOpen(false);
+      }
     };
     document.addEventListener("keydown", closeOnEscapeOrOutside);
     document.addEventListener("pointerdown", closeOnEscapeOrOutside);
     return () => { document.removeEventListener("keydown", closeOnEscapeOrOutside); document.removeEventListener("pointerdown", closeOnEscapeOrOutside); };
-  }, [isExploreOpen, pathname]);
+  }, [isCategoriesOpen, isExploreOpen, pathname]);
   if (isAdminPath) return null;
 
   const closeMobile = () => setIsMobileOpen(false);
@@ -146,11 +157,12 @@ export function Navbar({
 
       <nav aria-label="Navegación principal" className="vita-navbar__nav hidden items-center justify-center gap-1 lg:inline-flex lg:justify-self-center">
         {primaryLinks.map((link) => <Link aria-current={isActive(pathname, link.href) ? "page" : undefined} className={`inline-flex h-11 items-center px-3 text-sm font-semibold leading-none transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isActive(pathname, link.href) ? "text-primary" : "text-secondary hover:text-primary"}`} href={link.href} key={link.href}>{link.label}</Link>)}
-        <button aria-controls={menuId} aria-expanded={isExploreOpen} className="vita-explore-trigger inline-flex h-11 items-center justify-center gap-1 px-3 text-sm font-semibold leading-none text-secondary transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onClick={() => setIsExploreOpen((open) => !open)} type="button">Explorar <ChevronIcon className={`h-4 w-4 transition-transform duration-150 ${isExploreOpen ? "rotate-180" : ""}`} /></button>
+        <button aria-controls={categoriesMenuId} aria-expanded={isCategoriesOpen} className={dropdownTriggerClassName} onClick={() => { setIsExploreOpen(false); setIsCategoriesOpen((open) => !open); }} type="button">Categorías <ChevronIcon className={`h-4 w-4 transition-transform duration-150 ${isCategoriesOpen ? "rotate-180" : ""}`} /></button>
+        <button aria-controls={exploreMenuId} aria-expanded={isExploreOpen} className={dropdownTriggerClassName} onClick={() => { setIsCategoriesOpen(false); setIsExploreOpen((open) => !open); }} type="button">Explorar <ChevronIcon className={`h-4 w-4 transition-transform duration-150 ${isExploreOpen ? "rotate-180" : ""}`} /></button>
       </nav>
 
       <div className="vita-navbar__actions flex w-[132px] shrink-0 items-center sm:w-auto">
-        <CatalogSearch className="h-11 w-11 rounded-none border-0 bg-transparent shadow-none hover:bg-background-alt" onOpen={() => { setIsExploreOpen(false); closeMobile(); }} />
+        <CatalogSearch className="h-11 w-11 rounded-none border-0 bg-transparent shadow-none hover:bg-background-alt" onOpen={() => { setIsCategoriesOpen(false); setIsExploreOpen(false); closeMobile(); }} />
         <span className="hidden sm:contents"><IconLink href="/mi-cuenta/favoritos" label={`Mis favoritos, ${optimisticWishlistCount} productos`}><HeartIcon className="h-5 w-5" />{optimisticWishlistCount > 0 ? <span className="absolute right-1 top-1 flex min-h-4 min-w-4 items-center justify-center bg-primary px-1 text-[10px] font-bold text-white">{optimisticWishlistCount}</span> : null}</IconLink></span>
         <span className="hidden sm:contents"><IconLink href={accountHref} label={isAuthenticated ? "Ir a mi cuenta" : "Ingresar a mi cuenta"}><UserIcon className="h-5 w-5" /></IconLink></span>
         <IconLink href="/carrito" label={`Carrito, ${totalItems} productos`} onClick={(event) => { if (!ENABLE_MINI_CART) return; event.preventDefault(); openMiniCart(); }}><BagIcon className="h-5 w-5" />{totalItems > 0 ? <span className="absolute right-1 top-1 flex min-h-4 min-w-4 items-center justify-center bg-primary px-1 text-[10px] font-bold text-white">{totalItems}</span> : null}</IconLink>
@@ -158,10 +170,17 @@ export function Navbar({
       </div>
     </Container>
 
-    {isExploreOpen ? <div className="vita-explore-panel absolute inset-x-0 top-full hidden border-b border-border bg-surface lg:block" id={menuId}>
+    {isCategoriesOpen ? <div className="vita-explore-panel absolute inset-x-0 top-full hidden border-b border-border bg-surface lg:block" id={categoriesMenuId}>
+      <Container className="grid grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] gap-12 py-8">
+        <div className="max-w-sm"><p className="vita-label">Catálogo</p><h2 className="mt-3 font-display text-3xl leading-tight text-foreground">Categorías de VITA HOGAR.</h2><p className="mt-4 text-base leading-7 text-secondary">Recorré la tienda según cada categoría disponible.</p></div>
+        {categoryLinks.length > 0 ? <nav aria-label="Categorías de productos" className="grid grid-cols-2 gap-x-8 gap-y-6">{categoryLinks.map((link) => <Link className="group border-b border-border pb-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={() => setIsCategoriesOpen(false)}><span className="block font-display text-xl text-foreground transition-colors group-hover:text-primary">{link.label}</span><span className="mt-1 block text-sm leading-5 text-secondary">{link.detail}</span></Link>)}</nav> : <p className="text-sm text-secondary" role="status">No hay categorías disponibles en este momento.</p>}
+      </Container>
+    </div> : null}
+
+    {isExploreOpen ? <div className="vita-explore-panel absolute inset-x-0 top-full hidden border-b border-border bg-surface lg:block" id={exploreMenuId}>
       <Container className="grid grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] gap-12 py-8">
         <div className="max-w-sm"><p className="vita-label">La selección</p><h2 className="mt-3 font-display text-3xl leading-tight text-foreground">Explorar VITA HOGAR.</h2><p className="mt-4 text-base leading-7 text-secondary">Una selección editorial para recorrer materiales, texturas y objetos cotidianos.</p></div>
-        <nav aria-label="Explorar tienda" className="grid grid-cols-2 gap-x-8 gap-y-6">{navigationExploreLinks.map((link) => <Link className="group border-b border-border pb-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={() => setIsExploreOpen(false)}><span className="block font-display text-xl text-foreground transition-colors group-hover:text-primary">{link.label}</span><span className="mt-1 block text-sm leading-5 text-secondary">{link.detail}</span></Link>)}</nav>
+        <nav aria-label="Explorar tienda" className="grid grid-cols-2 gap-x-8 gap-y-6">{exploreLinks.map((link) => <Link className="group border-b border-border pb-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={() => setIsExploreOpen(false)}><span className="block font-display text-xl text-foreground transition-colors group-hover:text-primary">{link.label}</span><span className="mt-1 block text-sm leading-5 text-secondary">{link.detail}</span></Link>)}</nav>
       </Container>
     </div> : null}
 
@@ -169,7 +188,8 @@ export function Navbar({
       <section aria-label="Menú móvil" className="ml-auto flex h-full w-full max-w-sm flex-col overflow-y-auto bg-surface shadow-[0_12px_32px_rgba(46,41,36,0.08)]" ref={mobileDialogRef}>
         <div className="flex h-16 items-center justify-between border-b border-border px-4"><Link aria-label="Ir al inicio de VITA HOGAR" className="flex h-14 w-14 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href="/" onClick={closeMobile}><Image alt={siteConfig.logo.alt} className="h-full w-full object-contain" height={72} src={siteConfig.logo.src} width={72} /></Link><button aria-label="Cerrar menú" className={buttonStyles({ className: "h-11 w-11 rounded-none", size: "icon", variant: "ghost" })} onClick={closeMobile} ref={closeButtonRef} type="button"><CloseIcon className="h-5 w-5" /></button></div>
         <div className="grid gap-1 p-4"><Link className="flex min-h-11 items-center gap-3 border-b border-border py-3 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href="/buscar" onClick={closeMobile}><SearchIcon className="h-5 w-5" />Buscar en la tienda</Link>{primaryLinks.map((link) => <Link aria-current={isActive(pathname, link.href) ? "page" : undefined} className={`min-h-11 border-b border-border py-3 text-lg font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${isActive(pathname, link.href) ? "text-primary" : "text-foreground"}`} href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}</div>
-        <div className="mx-4 border-y border-border py-4"><p className="vita-label">Explorar</p><nav aria-label="Explorar tienda" className="mt-3 grid gap-1">{navigationExploreLinks.map((link) => <Link className="min-h-11 py-2 text-sm font-semibold text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}</nav></div>
+        <div className="mx-4 border-y border-border py-4"><p className="vita-label">Categorías</p>{categoryLinks.length > 0 ? <nav aria-label="Categorías de productos" className="mt-3 grid gap-1">{categoryLinks.map((link) => <Link className="min-h-11 py-2 text-sm font-semibold text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}</nav> : <p className="mt-3 text-sm text-secondary">No hay categorías disponibles en este momento.</p>}</div>
+        <div className="mx-4 border-b border-border py-4"><p className="vita-label">Explorar</p><nav aria-label="Explorar tienda" className="mt-3 grid gap-1">{exploreLinks.map((link) => <Link className="min-h-11 py-2 text-sm font-semibold text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}</nav></div>
         <div className="mt-auto grid gap-1 p-4"><Link className="min-h-11 py-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={accountHref} onClick={closeMobile}>{isAuthenticated ? "Mi cuenta" : "Ingresar"}</Link><Link className="min-h-11 py-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href="/mi-cuenta/favoritos" onClick={closeMobile}>Favoritos{optimisticWishlistCount ? ` (${optimisticWishlistCount})` : ""}</Link><Link className="min-h-11 py-2 text-sm font-semibold text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href="/carrito" onClick={closeMobile}>Carrito ({totalItems})</Link></div>
       </section>
     </div> : null}
