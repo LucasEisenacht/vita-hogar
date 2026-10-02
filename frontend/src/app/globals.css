@@ -1685,22 +1685,6 @@ a:hover { color: var(--primary-hover); }
   0%, 100% { transform: translate3d(0, 4px, 0) rotate(-38deg) scale(.76); }
   50% { transform: translate3d(8px, -26px, 0) rotate(-52deg) scale(.76); }
 }
-.vita-home-hero > div > div {
-  border-color: color-mix(in srgb, var(--accent-secondary) 36%, var(--border));
-}
-.vita-home-hero > div > div > div:last-child {
-  position: relative;
-}
-.vita-home-hero > div > div > div:last-child::before {
-  background: var(--accent-secondary);
-  content: "";
-  height: 3rem;
-  left: 0;
-  opacity: 0.72;
-  position: absolute;
-  top: 2.2rem;
-  width: 2px;
-}
 .vita-habitat-grid > a:first-child {
   background-position: center;
 }

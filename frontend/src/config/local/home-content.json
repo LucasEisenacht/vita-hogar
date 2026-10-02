@@ -1,15 +1,15 @@
 {
   "hero": {
-    "badge": "VITA HOGAR",
+    "badge": "OBJETOS PARA VIVIR MEJOR",
     "desktopImageUrl": "/images/vita/home-bedroom-editorial.webp",
     "isActive": true,
     "mobileImageUrl": "/images/vita/home-bedroom-editorial.webp",
     "primaryCtaHref": "/tienda",
-    "primaryCtaLabel": "Descubrir colección",
+    "primaryCtaLabel": "Explorar colección",
     "secondaryCtaHref": "/tienda?orden=newest",
     "secondaryCtaLabel": "Ver novedades",
-    "subtitle": "Objetos y textiles elegidos para acompañar el descanso, las comidas y los momentos que hacen hogar.",
-    "title": "Hacé de tu casa tu lugar favorito."
+    "subtitle": "Textiles, objetos y detalles para hacer de cada rincón un lugar más cálido.",
+    "title": "Espacios que se sienten tuyos."
   },
   "featuredCategories": {
     "items": [],
