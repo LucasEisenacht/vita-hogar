@@ -37,6 +37,117 @@ export type HomeContentSaveResult =
       status: "conflict" | "error" | "validation_error";
     };
 
+function withTextFallback(value: string, fallback: string) {
+  return value.trim() || fallback;
+}
+
+export function resolveHomeContentFallbacks(
+  config: HomeContentConfig,
+): HomeContentConfig {
+  return {
+    benefits: {
+      ...config.benefits,
+      title: withTextFallback(
+        config.benefits.title,
+        fallbackHomeContentConfig.benefits.title,
+      ),
+    },
+    featuredCategories: {
+      ...config.featuredCategories,
+      subtitle: withTextFallback(
+        config.featuredCategories.subtitle,
+        fallbackHomeContentConfig.featuredCategories.subtitle,
+      ),
+      title: withTextFallback(
+        config.featuredCategories.title,
+        fallbackHomeContentConfig.featuredCategories.title,
+      ),
+    },
+    featuredProducts: {
+      ...config.featuredProducts,
+      ctaHref: withTextFallback(
+        config.featuredProducts.ctaHref,
+        fallbackHomeContentConfig.featuredProducts.ctaHref,
+      ),
+      ctaLabel: withTextFallback(
+        config.featuredProducts.ctaLabel,
+        fallbackHomeContentConfig.featuredProducts.ctaLabel,
+      ),
+      subtitle: withTextFallback(
+        config.featuredProducts.subtitle,
+        fallbackHomeContentConfig.featuredProducts.subtitle,
+      ),
+      title: withTextFallback(
+        config.featuredProducts.title,
+        fallbackHomeContentConfig.featuredProducts.title,
+      ),
+    },
+    hero: {
+      ...config.hero,
+      badge: withTextFallback(
+        config.hero.badge,
+        fallbackHomeContentConfig.hero.badge,
+      ),
+      desktopImageUrl: withTextFallback(
+        config.hero.desktopImageUrl,
+        fallbackHomeContentConfig.hero.desktopImageUrl,
+      ),
+      mobileImageUrl: withTextFallback(
+        config.hero.mobileImageUrl,
+        config.hero.desktopImageUrl ||
+          fallbackHomeContentConfig.hero.mobileImageUrl,
+      ),
+      primaryCtaHref: withTextFallback(
+        config.hero.primaryCtaHref,
+        fallbackHomeContentConfig.hero.primaryCtaHref,
+      ),
+      primaryCtaLabel: withTextFallback(
+        config.hero.primaryCtaLabel,
+        fallbackHomeContentConfig.hero.primaryCtaLabel,
+      ),
+      secondaryCtaHref: config.hero.secondaryCtaLabel
+        ? withTextFallback(
+            config.hero.secondaryCtaHref,
+            fallbackHomeContentConfig.hero.secondaryCtaHref,
+          )
+        : "",
+      secondaryCtaLabel: config.hero.secondaryCtaHref
+        ? withTextFallback(
+            config.hero.secondaryCtaLabel,
+            fallbackHomeContentConfig.hero.secondaryCtaLabel,
+          )
+        : "",
+      subtitle: withTextFallback(
+        config.hero.subtitle,
+        fallbackHomeContentConfig.hero.subtitle,
+      ),
+      title: withTextFallback(
+        config.hero.title,
+        fallbackHomeContentConfig.hero.title,
+      ),
+    },
+    instagram: {
+      ...config.instagram,
+      buttonHref: withTextFallback(
+        config.instagram.buttonHref,
+        fallbackHomeContentConfig.instagram.buttonHref,
+      ),
+      buttonLabel: withTextFallback(
+        config.instagram.buttonLabel,
+        fallbackHomeContentConfig.instagram.buttonLabel,
+      ),
+      text: withTextFallback(
+        config.instagram.text,
+        fallbackHomeContentConfig.instagram.text,
+      ),
+      title: withTextFallback(
+        config.instagram.title,
+        fallbackHomeContentConfig.instagram.title,
+      ),
+    },
+  };
+}
+
 function sortByOrder<TItem extends { order: number }>(items: Array<TItem>) {
   return [...items].sort((firstItem, secondItem) => {
     if (firstItem.order !== secondItem.order) {

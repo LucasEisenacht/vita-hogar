@@ -1,40 +1,40 @@
 {
   "hero": {
     "badge": "VITA HOGAR",
-    "desktopImageUrl": "",
+    "desktopImageUrl": "/images/vita/home-bedroom-editorial.webp",
     "isActive": true,
-    "mobileImageUrl": "",
+    "mobileImageUrl": "/images/vita/home-bedroom-editorial.webp",
     "primaryCtaHref": "/tienda",
-    "primaryCtaLabel": "Ver tienda",
-    "secondaryCtaHref": "",
-    "secondaryCtaLabel": "",
-    "subtitle": "Contenido pendiente de configuracion.",
-    "title": "VITA HOGAR"
+    "primaryCtaLabel": "Descubrir colección",
+    "secondaryCtaHref": "/tienda?orden=newest",
+    "secondaryCtaLabel": "Ver novedades",
+    "subtitle": "Objetos y textiles elegidos para acompañar el descanso, las comidas y los momentos que hacen hogar.",
+    "title": "Hacé de tu casa tu lugar favorito."
   },
   "featuredCategories": {
     "items": [],
-    "subtitle": "",
-    "title": "Categorias"
+    "subtitle": "Texturas, materiales y objetos para construir espacios tranquilos, a tu ritmo.",
+    "title": "Una casa se construye de a poco."
   },
   "featuredProducts": {
     "ctaHref": "/tienda",
-    "ctaLabel": "Ver tienda",
+    "ctaLabel": "Ver toda la tienda",
     "isActive": true,
-    "limit": 6,
+    "limit": 4,
     "sort": "featured",
-    "subtitle": "",
-    "title": "Productos"
+    "subtitle": "Texturas y objetos elegidos para acompañar distintos momentos de la casa.",
+    "title": "Novedades y seleccionados."
   },
   "benefits": {
     "items": [],
-    "title": "Beneficios"
+    "title": "Información útil, sin promesas inventadas."
   },
   "instagram": {
     "buttonHref": "/",
-    "buttonLabel": "",
+    "buttonLabel": "Ver la selección",
     "isActive": false,
-    "text": "",
-    "title": "Redes sociales",
+    "text": "Luz natural, texturas honestas y piezas que encuentran su lugar sin apuro.",
+    "title": "La escena importa tanto como el objeto.",
     "username": ""
   }
 }

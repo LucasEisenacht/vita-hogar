@@ -5,7 +5,9 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "@/components/providers/providers";
 import { PageTransition } from "@/components/experience/page-transition";
+import { getNavigationCategories } from "@/config/catalog-navigation";
 import { siteConfig } from "@/config/site";
+import { getPublicCategories } from "@/lib/catalog/queries";
 import { createPublicMetadata, getMetadataBase } from "@/lib/seo/metadata";
 import {
   createJsonLdScript,
@@ -45,10 +47,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [
+    {
+      data: { user },
+    },
+    publicCategories,
+  ] = await Promise.all([
+    supabase.auth.getUser(),
+    getPublicCategories().catch(() => []),
+  ]);
   const isAuthenticated = Boolean(user);
+  const navigationCategories = getNavigationCategories(publicCategories);
 
   return (
     <html
@@ -69,7 +78,10 @@ export default async function RootLayout({
             type="application/ld+json"
           />
           <AnnouncementBar />
-          <Navbar isAuthenticated={isAuthenticated} />
+          <Navbar
+            categories={navigationCategories}
+            isAuthenticated={isAuthenticated}
+          />
           <main className="flex min-h-0 flex-1 flex-col">
             <PageTransition>{children}</PageTransition>
           </main>

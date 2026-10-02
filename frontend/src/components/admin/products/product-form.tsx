@@ -654,6 +654,14 @@ export function ProductForm({
   const supportsModelVariants = Boolean(selectedCategorySlug);
   const categoryConfig = getProductCategoryFormConfig(selectedCategorySlug);
   const fieldErrors = useMemo(() => state.fieldErrors ?? {}, [state.fieldErrors]);
+  const submissionError =
+    state.status === "error"
+      ? state.message ??
+        fieldErrors.form ??
+        Object.values(fieldErrors).find(
+          (message): message is string => Boolean(message),
+        )
+      : null;
   const usesModelVariantStock = modelVariantRows.length > 0;
   const modelVariantStockTotal = modelVariantRows.reduce((total, row) => {
     const stockValue = Number(row.stock);
@@ -1700,6 +1708,14 @@ export function ProductForm({
       </div>
 
       <div className="sticky bottom-0 z-10 -mx-5 border-t border-border bg-background/90 px-5 py-4 backdrop-blur sm:static sm:mx-0 sm:border-t-0 sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none">
+        {submissionError ? (
+          <div
+            className="mb-3 rounded-[20px] border border-destructive/25 bg-[#fff1f2] px-4 py-3 text-sm font-medium text-destructive"
+            role="alert"
+          >
+            {submissionError}
+          </div>
+        ) : null}
         <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Link
             className={buttonStyles({

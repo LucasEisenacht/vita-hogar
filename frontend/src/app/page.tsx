@@ -6,7 +6,10 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { HomeCommercialSections } from "@/components/sections/home-commercial-sections";
 import { InstagramEditorialSection } from "@/components/sections/instagram-editorial-section";
 import { NewsletterCtaSection } from "@/components/sections/newsletter-cta-section";
-import { getHomeContentConfig } from "@/lib/home-content/config";
+import {
+  getHomeContentConfig,
+  resolveHomeContentFallbacks,
+} from "@/lib/home-content/config";
 import { createPublicMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = createPublicMetadata({
@@ -17,16 +20,18 @@ export const metadata: Metadata = createPublicMetadata({
 });
 
 export default async function Home() {
-  const homeContent = await getHomeContentConfig();
+  const homeContent = resolveHomeContentFallbacks(
+    await getHomeContentConfig(),
+  );
 
   return (
     <div className="home-page-shell">
       <BrandLeafField variant="home" />
       <HeroSection content={homeContent.hero} />
-      <CategoriesSection />
+      <CategoriesSection content={homeContent.featuredCategories} />
       <HomeCommercialSections content={homeContent.featuredProducts} />
       <BenefitsSection content={homeContent.benefits} />
-      <InstagramEditorialSection />
+      <InstagramEditorialSection content={homeContent.instagram} />
       <NewsletterCtaSection />
     </div>
   );

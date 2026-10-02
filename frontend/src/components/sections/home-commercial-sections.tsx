@@ -9,5 +9,5 @@ function takeProducts(products: Array<PublicProduct>, limit: number) { return pr
 export async function HomeCommercialSections({ content }: { content: HomeContentFeaturedProducts }) {
   if (!content.isActive) return null;
   const [products, favoriteProductIds] = await Promise.all([getPublicProducts({ sort: content.sort }), getCurrentUserFavoriteIds()]);
-  return <ProductShowcaseSection ctaHref={content.ctaHref} ctaLabel="Ver toda la tienda" favoriteProductIds={favoriteProductIds} products={takeProducts(products.filter((product) => product.featured), Math.min(content.limit, 4))} subtitle={content.subtitle} title={content.title} />;
+  return <ProductShowcaseSection ctaHref={content.ctaHref} ctaLabel={content.ctaLabel} favoriteProductIds={favoriteProductIds} products={takeProducts(products.filter((product) => product.featured), content.limit)} subtitle={content.subtitle} title={content.title} />;
 }
