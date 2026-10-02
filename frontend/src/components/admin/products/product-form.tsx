@@ -1283,6 +1283,7 @@ export function ProductForm({
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
+                    {category.is_active ? "" : " (inactiva)"}
                   </option>
                 ))}
               </SelectField>

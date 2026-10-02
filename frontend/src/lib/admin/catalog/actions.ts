@@ -75,15 +75,32 @@ function getImageFilesFromFormData(formData: FormData) {
 
 async function getProductCategory(
   categoryId: string,
+  options: { allowInactive?: boolean } = {},
 ): Promise<ProductCategoryRecord | null> {
   const supabase = await createClient();
-  const { data, error } = await supabase
+  let query = supabase
     .from("categories")
     .select("id,slug")
-    .eq("id", categoryId)
-    .maybeSingle();
+    .eq("id", categoryId);
+
+  if (!options.allowInactive) {
+    query = query.eq("is_active", true);
+  }
+
+  const { data, error } = await query.maybeSingle();
 
   return error ? null : data;
+}
+
+async function getCurrentProductCategoryId(productId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("category_id")
+    .eq("id", productId)
+    .maybeSingle();
+
+  return error ? null : data?.category_id ?? null;
 }
 
 async function slugExists(slug: string, currentProductId?: string) {
@@ -503,8 +520,11 @@ export async function updateProduct(
     };
   }
 
+  const currentCategoryId = await getCurrentProductCategoryId(productId);
   const category = validation.data.category_id
-    ? await getProductCategory(validation.data.category_id)
+    ? await getProductCategory(validation.data.category_id, {
+        allowInactive: validation.data.category_id === currentCategoryId,
+      })
     : null;
 
   if (!category) {

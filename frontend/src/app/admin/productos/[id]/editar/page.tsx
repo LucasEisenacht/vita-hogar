@@ -12,9 +12,9 @@ import {
 } from "@/lib/admin/catalog/actions";
 import { getProductImages } from "@/lib/admin/catalog/images/queries";
 import {
-  getActiveCategories,
   getAdminProductById,
 } from "@/lib/admin/catalog/queries";
+import { getProductFormCategories } from "@/lib/admin/categories/queries";
 import { getRoleLabel } from "@/lib/auth/get-current-role";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import Link from "next/link";
@@ -58,9 +58,8 @@ export default async function EditProductPage({
   searchParams,
 }: EditProductPageProps) {
   const { id } = await params;
-  const [{ role, user }, categories, product, queryParams] = await Promise.all([
+  const [{ role, user }, product, queryParams] = await Promise.all([
     requireAdmin(),
-    getActiveCategories(),
     getAdminProductById(id),
     searchParams,
   ]);
@@ -69,7 +68,10 @@ export default async function EditProductPage({
     notFound();
   }
 
-  const images = await getProductImages(product.id);
+  const [images, categories] = await Promise.all([
+    getProductImages(product.id),
+    getProductFormCategories(product.category_id),
+  ]);
 
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");

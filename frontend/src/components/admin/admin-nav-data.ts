@@ -10,7 +10,6 @@ export const adminNavItems: Array<AdminNavItemData> = [
   {
     href: "/admin/categorias",
     icon: "categories",
-    isEnabled: false,
     label: "Categorías",
   },
   {

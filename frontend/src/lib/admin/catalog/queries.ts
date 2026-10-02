@@ -13,6 +13,7 @@ import type {
   AdminProductStockFilter,
   ProductWithCategory,
 } from "@/lib/admin/catalog/types";
+import { getProductFormCategories } from "@/lib/admin/categories/queries";
 
 const adminProductsPageSize = 20;
 const productImagesBucket = "product-images";
@@ -271,18 +272,5 @@ export async function getAdminProductById(
 }
 
 export async function getActiveCategories(): Promise<Array<Category>> {
-  await requireAdmin();
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("is_active", true)
-    .order("sort_order", { ascending: true })
-    .order("name", { ascending: true });
-
-  if (error) {
-    throw new Error("No pudimos cargar las categorias.");
-  }
-
-  return data ?? [];
+  return getProductFormCategories();
 }
