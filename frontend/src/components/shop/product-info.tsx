@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 type ProductInfoProps = {
   initialIsFavorite?: boolean;
   onSelectedColorChange?: (colorName: string) => void;
+  previewMode?: boolean;
   product: PublicProduct;
   selectedColor?: string;
   selectedVariant?: ProductExperienceVariant;
@@ -22,6 +23,7 @@ type ProductInfoProps = {
 export function ProductInfo({
   initialIsFavorite = false,
   onSelectedColorChange,
+  previewMode = false,
   product,
   selectedColor,
   selectedVariant,
@@ -105,13 +107,15 @@ export function ProductInfo({
             >
               {stockText}
             </p>
-            <FavoriteButton
-              className="sm:w-auto"
-              initialIsFavorite={initialIsFavorite}
-              productId={product.id}
-              productSlug={product.slug}
-              variant="soft"
-            />
+            {previewMode ? null : (
+              <FavoriteButton
+                className="sm:w-auto"
+                initialIsFavorite={initialIsFavorite}
+                productId={product.id}
+                productSlug={product.slug}
+                variant="soft"
+              />
+            )}
           </div>
         </div>
 
@@ -155,6 +159,7 @@ export function ProductInfo({
 
         <AddToCartPanel
           onSelectedColorChange={onSelectedColorChange}
+          previewMode={previewMode}
           product={product}
           selectedColor={selectedColor}
         />

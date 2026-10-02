@@ -305,14 +305,14 @@ function getCaseModelVariantErrorState(error: CatalogDatabaseError) {
   if (error.code === "23505" || message.includes("duplicate")) {
     return getProductFieldErrorState(
       "modelVariants",
-      "No repitas la misma combinacion de marca y modelo.",
+      "No repitas la misma combinacion de grupo y opcion.",
     );
   }
 
   if (error.code === "23514") {
     return getProductFieldErrorState(
       "modelVariants",
-      "Revisa marca, modelo y stock de las variantes disponibles.",
+      "Revisa grupo, opcion y stock de las variantes disponibles.",
     );
   }
 

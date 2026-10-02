@@ -24,6 +24,10 @@ function formatUpdatedAt(value: string) {
 }
 
 function ProductActions({ product }: { product: ProductWithCategory }) {
+  const productHref = product.is_active
+    ? `/producto/${product.slug}`
+    : `/admin/productos/${product.id}/preview`;
+
   return (
     <div className="flex min-w-[190px] items-center gap-2">
       <Link
@@ -42,9 +46,9 @@ function ProductActions({ product }: { product: ProductWithCategory }) {
           size: "sm",
           variant: "secondary",
         })}
-        href={`/producto/${product.slug}`}
+        href={productHref}
       >
-        Ver producto
+        {product.is_active ? "Ver producto" : "Vista previa"}
       </Link>
     </div>
   );

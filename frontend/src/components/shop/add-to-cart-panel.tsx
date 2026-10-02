@@ -17,12 +17,14 @@ import { Button } from "@/components/ui/button";
 
 type AddToCartPanelProps = {
   onSelectedColorChange?: (colorName: string) => void;
+  previewMode?: boolean;
   product: PublicProduct;
   selectedColor?: string;
 };
 
 export function AddToCartPanel({
   onSelectedColorChange,
+  previewMode = false,
   product,
   selectedColor: controlledSelectedColor,
 }: AddToCartPanelProps) {
@@ -93,7 +95,8 @@ export function AddToCartPanel({
     Math.max(1, purchaseLimit),
   );
   const canAdd = Boolean(
-    !isOutOfStock &&
+    !previewMode &&
+      !isOutOfStock &&
       (!hasModelVariants || selectedModelVariant) &&
       (!requiresCompatibility || selectedCompatibility),
   );
@@ -103,7 +106,7 @@ export function AddToCartPanel({
       return "";
     }
 
-    return "Elegi una compatibilidad para agregar este producto.";
+    return "Elegi una opcion adicional para agregar este producto.";
   })();
 
   const modelVariantMessage = (() => {
@@ -113,12 +116,12 @@ export function AddToCartPanel({
 
     if (!selectedModelVariant) {
       return usesColorModelVariants
-        ? "Esta combinacion de modelo y color no esta disponible."
-        : "Elegi tu modelo para agregar este producto.";
+        ? "Esta combinacion de opcion y color no esta disponible."
+        : "Elegi una opcion para agregar este producto.";
     }
 
     if (selectedModelVariant.stock <= 0) {
-      return "Ese modelo esta sin stock.";
+      return "Esa opcion esta sin stock.";
     }
 
     return "";
@@ -247,7 +250,7 @@ export function AddToCartPanel({
       {hasModelVariants ? (
         <div className="space-y-3">
           <h2 className="font-display text-base font-semibold text-foreground">
-            Elegi tu modelo
+            Elegi una opcion
           </h2>
           <div className="flex flex-wrap gap-2.5">
             {(usesColorModelVariants ? modelOptions : activeModelVariants).map((option) => {
@@ -308,7 +311,7 @@ export function AddToCartPanel({
       ) : requiresCompatibility ? (
         <div className="space-y-3">
           <h2 className="font-display text-base font-semibold text-foreground">
-            Compatibilidad
+            Opciones adicionales
           </h2>
           <div className="flex flex-wrap gap-2">
             {compatibilityOptions.map((item) => {
@@ -345,7 +348,7 @@ export function AddToCartPanel({
           <button
             aria-label="Reducir cantidad"
             className="h-9 w-9 rounded-full text-muted-foreground transition-colors duration-[250ms] hover:bg-surface-soft hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-45"
-            disabled={displayQuantity <= 1}
+            disabled={previewMode || displayQuantity <= 1}
             onClick={decreaseQuantity}
             type="button"
           >
@@ -357,7 +360,7 @@ export function AddToCartPanel({
           <button
             aria-label="Aumentar cantidad"
             className="h-9 w-9 rounded-full text-muted-foreground transition-colors duration-[250ms] hover:bg-surface-soft hover:text-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-45"
-            disabled={displayQuantity >= purchaseLimit}
+            disabled={previewMode || displayQuantity >= purchaseLimit}
             onClick={increaseQuantity}
             type="button"
           >
@@ -377,18 +380,27 @@ export function AddToCartPanel({
       <div className="grid gap-3">
         <Button
           className="h-14 w-full text-base"
-          disabled={!canAdd}
+          disabled={previewMode || !canAdd}
           onClick={handleAddToCart}
           size="lg"
         >
-          Agregar al carrito
+          {previewMode ? "Carrito deshabilitado en vista previa" : "Agregar al carrito"}
         </Button>
-        <a
-          className="inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold text-primary-hover transition-colors duration-[250ms] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          href="#product-purchase-panel"
-        >
-          Comprar ahora
-        </a>
+        {previewMode ? (
+          <span
+            aria-disabled="true"
+            className="inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold text-muted-foreground"
+          >
+            Compra deshabilitada en vista previa
+          </span>
+        ) : (
+          <a
+            className="inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold text-primary-hover transition-colors duration-[250ms] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            href="#product-purchase-panel"
+          >
+            Comprar ahora
+          </a>
+        )}
       </div>
 
       <p

@@ -964,7 +964,7 @@ export function ProductForm({
 
       if (hasIncompleteRow) {
         nextErrors.compatibility =
-          "Completa marca y modelo en cada variante cargada.";
+          "Completa grupo y opcion en cada variante cargada.";
       }
     }
 
@@ -1432,10 +1432,10 @@ export function ProductForm({
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                       <p className="font-semibold text-foreground">
-                        Generar matriz variante + color
+                        Generar matriz de opciones + color
                       </p>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        Usa las variantes cargadas y los colores del campo Colores. Conserva el stock existente.
+                        Usa las opciones cargadas y los colores del campo Colores. Conserva el stock existente.
                       </p>
                     </div>
                     <Button
@@ -1477,7 +1477,7 @@ export function ProductForm({
                         <option value="false">Inactiva</option>
                       </select>
                       <Input
-                        label="Marca"
+                        label="Grupo"
                         name="modelVariantBrand"
                         onChange={(event) =>
                           updateModelVariantRow(
@@ -1486,11 +1486,11 @@ export function ProductForm({
                             event.target.value,
                           )
                         }
-                        placeholder="Marca"
+                        placeholder="Grupo"
                         value={row.brand}
                       />
                       <Input
-                        label="Modelo"
+                        label="Opcion"
                         name="modelVariantModel"
                         onChange={(event) =>
                           updateModelVariantRow(
@@ -1499,7 +1499,7 @@ export function ProductForm({
                             event.target.value,
                           )
                         }
-                        placeholder="Modelo"
+                        placeholder="Opcion"
                         value={row.model}
                       />
                       <Input
@@ -1564,8 +1564,8 @@ export function ProductForm({
                   Este producto no requiere variantes especificas
                 </p>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Si corresponde, podes cargar opciones, compatibilidades y
-                  colores como informacion comercial adicional.
+                  Si corresponde, podes cargar opciones adicionales y colores
+                  como informacion comercial.
                 </p>
               </div>
             )}
@@ -1573,8 +1573,8 @@ export function ProductForm({
             <div className="grid gap-5 lg:grid-cols-2">
               <Input
                 error={fieldErrors.compatibility}
-                helperText="Separa cada compatibilidad con una coma."
-                label="Compatibilidades"
+                helperText="Separa cada opcion adicional con una coma."
+                label="Opciones adicionales"
                 name="compatibility"
                 onChange={(event) => setCompatibilityText(event.target.value)}
                 placeholder="Separadas por coma"

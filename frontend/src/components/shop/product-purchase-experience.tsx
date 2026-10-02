@@ -12,11 +12,13 @@ import { ProductInfo } from "@/components/shop/product-info";
 
 type ProductPurchaseExperienceProps = {
   initialIsFavorite?: boolean;
+  previewMode?: boolean;
   product: PublicProduct;
 };
 
 export function ProductPurchaseExperience({
   initialIsFavorite = false,
+  previewMode = false,
   product,
 }: ProductPurchaseExperienceProps) {
   const productVariants = useMemo(
@@ -79,6 +81,7 @@ export function ProductPurchaseExperience({
         <ProductInfo
           initialIsFavorite={initialIsFavorite}
           onSelectedColorChange={handleColorChange}
+          previewMode={previewMode}
           product={product}
           selectedColor={selectedColor}
           selectedVariant={selectedVariant}

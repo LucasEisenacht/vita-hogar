@@ -286,15 +286,15 @@ function parseModelVariants(
     }
 
     if (!brand) {
-      fieldErrors.modelVariants = "La marca de cada variante es obligatoria.";
+      fieldErrors.modelVariants = "El grupo de cada variante es obligatorio.";
     } else if (brand.length > 80) {
-      fieldErrors.modelVariants = "La marca debe tener hasta 80 caracteres.";
+      fieldErrors.modelVariants = "El grupo debe tener hasta 80 caracteres.";
     }
 
     if (!model) {
-      fieldErrors.modelVariants = "El modelo de la variante es obligatorio.";
+      fieldErrors.modelVariants = "La opcion de la variante es obligatoria.";
     } else if (model.length > 120) {
-      fieldErrors.modelVariants = "El modelo debe tener hasta 120 caracteres.";
+      fieldErrors.modelVariants = "La opcion debe tener hasta 120 caracteres.";
     }
 
     if (options.requireColor && !colorName) {
@@ -315,7 +315,7 @@ function parseModelVariants(
 
     if (brand && model && seenModels.has(duplicateKey)) {
       fieldErrors.modelVariants =
-        "No repitas la misma combinacion de marca, modelo y color.";
+        "No repitas la misma combinacion de grupo, opcion y color.";
     }
 
     seenModels.add(duplicateKey);

@@ -29,7 +29,7 @@ export function ProductCard({
   );
   const variantSummary =
     activeModelVariants.length > 0
-      ? `${activeModelVariants.length} modelos disponibles`
+      ? `${activeModelVariants.length} opciones disponibles`
       : [product.brand, product.model, product.storageCapacity]
           .filter((value): value is string => Boolean(value))
           .join(" - ");
