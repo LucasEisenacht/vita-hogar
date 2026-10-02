@@ -9,6 +9,7 @@ import type {
 import type {
   AdminProductFilters,
   AdminProductListResult,
+  AdminProductSummaryCounts,
   AdminProductStatusFilter,
   AdminProductStockFilter,
   ProductWithCategory,
@@ -122,6 +123,44 @@ export function normalizeAdminProductTextFilter(value?: string | string[]) {
   const normalizedValue = rawValue?.trim();
 
   return normalizedValue ? normalizedValue.slice(0, 80) : undefined;
+}
+
+export async function getAdminProductSummaryCounts(): Promise<AdminProductSummaryCounts> {
+  await requireAdmin();
+  const supabase = await createClient();
+  const [totalResult, activeResult, featuredResult, outOfStockResult] =
+    await Promise.all([
+      supabase.from("products").select("id", { count: "exact", head: true }),
+      supabase
+        .from("products")
+        .select("id", { count: "exact", head: true })
+        .eq("is_active", true),
+      supabase
+        .from("products")
+        .select("id", { count: "exact", head: true })
+        .eq("is_featured", true),
+      supabase
+        .from("products")
+        .select("id", { count: "exact", head: true })
+        .eq("availability_type", "in_stock")
+        .eq("stock", 0),
+    ]);
+
+  if (
+    totalResult.error ||
+    activeResult.error ||
+    featuredResult.error ||
+    outOfStockResult.error
+  ) {
+    throw new Error("No pudimos cargar el resumen global de productos.");
+  }
+
+  return {
+    activeCount: activeResult.count ?? 0,
+    featuredCount: featuredResult.count ?? 0,
+    outOfStockCount: outOfStockResult.count ?? 0,
+    totalCount: totalResult.count ?? 0,
+  };
 }
 
 export async function getAdminProducts(

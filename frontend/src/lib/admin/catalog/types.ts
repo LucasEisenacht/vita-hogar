@@ -70,6 +70,13 @@ export type AdminProductListResult = {
   totalPages: number;
 };
 
+export type AdminProductSummaryCounts = {
+  activeCount: number;
+  featuredCount: number;
+  outOfStockCount: number;
+  totalCount: number;
+};
+
 export type ProductFormValues = {
   availability_type: ProductAvailabilityType;
   badge: string | null;

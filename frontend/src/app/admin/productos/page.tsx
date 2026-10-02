@@ -7,6 +7,7 @@ import { ProductSummaryCards } from "@/components/admin/products/product-summary
 import { buttonStyles } from "@/components/ui/button";
 import {
   getActiveCategories,
+  getAdminProductSummaryCounts,
   getAdminProducts,
   normalizeAdminProductPage,
   normalizeAdminProductStatusFilter,
@@ -104,25 +105,23 @@ export default async function AdminProductsPage({
   );
   const status = normalizeAdminProductStatusFilter(params?.estado);
   const stock = normalizeAdminProductStockFilter(params?.stock);
-  const productResult = await getAdminProducts({
-    availability,
-    categorySlug,
-    condition,
-    page: normalizeAdminProductPage(params?.pagina),
-    query,
-    status,
-    stock,
-  });
+  const [productResult, summaryCounts] = await Promise.all([
+    getAdminProducts({
+      availability,
+      categorySlug,
+      condition,
+      page: normalizeAdminProductPage(params?.pagina),
+      query,
+      status,
+      stock,
+    }),
+    getAdminProductSummaryCounts(),
+  ]);
   const products = productResult.products;
   const firstName = getMetadataText(user.user_metadata, "first_name");
   const lastName = getMetadataText(user.user_metadata, "last_name");
   const userName =
     [firstName, lastName].filter(Boolean).join(" ") || "Equipo VITA HOGAR";
-  const activeCount = products.filter((product) => product.is_active).length;
-  const featuredCount = products.filter((product) => product.is_featured).length;
-  const outOfStockCount = products.filter(
-    (product) => product.availability_type === "in_stock" && product.stock === 0,
-  ).length;
   const statusMessage = getStatusMessage(params?.status);
 
   return (
@@ -166,10 +165,10 @@ export default async function AdminProductsPage({
       ) : null}
 
       <ProductSummaryCards
-        activeCount={activeCount}
-        featuredCount={featuredCount}
-        outOfStockCount={outOfStockCount}
-        totalCount={productResult.totalCount}
+        activeCount={summaryCounts.activeCount}
+        featuredCount={summaryCounts.featuredCount}
+        outOfStockCount={summaryCounts.outOfStockCount}
+        totalCount={summaryCounts.totalCount}
       />
 
       <ProductAdminFilters

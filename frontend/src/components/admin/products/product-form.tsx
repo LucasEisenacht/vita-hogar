@@ -626,7 +626,6 @@ export function ProductForm({
     product?.is_active ? "published" : "draft",
   );
   const [price, setPrice] = useState(String(product?.price ?? ""));
-  const [cost, setCost] = useState("");
   const [stock, setStock] = useState(String(product?.stock ?? 0));
   const [compatibilityText, setCompatibilityText] = useState(
     product?.compatibility.join(", ") ?? "",
@@ -667,13 +666,6 @@ export function ProductForm({
     ? modelVariantStockTotal
     : Number(stock) || 0;
   const priceValue = normalizeMoneyInput(price);
-  const costValue = normalizeMoneyInput(cost);
-  const profit =
-    priceValue !== null && costValue !== null ? priceValue - costValue : null;
-  const margin =
-    profit !== null && priceValue !== null && priceValue > 0
-      ? (profit / priceValue) * 100
-      : null;
   const primaryImage =
     existingImages.find((image) => image.is_primary) ?? existingImages[0];
   const primaryLocalPhoto =
@@ -1339,21 +1331,10 @@ export function ProductForm({
 
         <div className={isWizardMode ? (currentStep === 2 ? "block" : "hidden") : "block"}>
           <WizardPanel
-            description="Define precio, ganancia estimada y stock sin tocar reglas de checkout."
+            description="Define precio y stock sin tocar reglas de checkout."
             title="Precio"
           >
-            <div className="grid gap-5 lg:grid-cols-3">
-              <Input
-                helperText="No se muestra al cliente."
-                label="Costo"
-                min={0}
-                name="adminCost"
-                onChange={(event) => setCost(event.target.value)}
-                placeholder="0"
-                step={1}
-                type="number"
-                value={cost}
-              />
+            <div className="grid gap-5 lg:grid-cols-2">
               <Input
                 error={fieldErrors.price}
                 label="Precio de venta"
@@ -1378,25 +1359,6 @@ export function ProductForm({
             </div>
 
             <div className="grid gap-4 lg:grid-cols-3">
-              <div className="rounded-[24px] border border-border bg-surface-soft p-5">
-                <p className="text-sm text-muted-foreground">Ganancia estimada</p>
-                <p className="mt-2 font-display text-2xl font-semibold text-foreground">
-                  {profit === null
-                    ? "Pendiente"
-                    : formatAdminCurrency(profit)}
-                </p>
-                {profit === null ? (
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    Completa el costo para calcular la ganancia.
-                  </p>
-                ) : null}
-              </div>
-              <div className="rounded-[24px] border border-border bg-surface-soft p-5">
-                <p className="text-sm text-muted-foreground">Margen estimado</p>
-                <p className="mt-2 font-display text-2xl font-semibold text-foreground">
-                  {margin === null ? "Pendiente" : `${margin.toFixed(1)}%`}
-                </p>
-              </div>
               <div className="rounded-[24px] border border-border bg-surface-soft p-5">
                 <p className="text-sm text-muted-foreground">Moneda</p>
                 <p className="mt-2 font-display text-2xl font-semibold text-foreground">
@@ -1702,16 +1664,6 @@ export function ProductForm({
                   [
                     "Precio",
                     priceValue === null ? "Pendiente" : formatAdminCurrency(priceValue),
-                  ],
-                  [
-                    "Costo",
-                    costValue === null
-                      ? "Completa el costo para calcular la ganancia"
-                      : formatAdminCurrency(costValue),
-                  ],
-                  [
-                    "Ganancia estimada",
-                    profit === null ? "Pendiente" : formatAdminCurrency(profit),
                   ],
                   ["Stock", `${visibleStock} unidades`],
                   ["Variantes cargadas", String(selectedModelCount)],

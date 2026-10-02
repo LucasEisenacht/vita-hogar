@@ -743,6 +743,40 @@ export async function duplicateProduct(productId: string) {
     throw new Error("No pudimos encontrar el producto para duplicar.");
   }
 
+  const { data: originalModelVariants, error: modelVariantsError } =
+    await supabase
+      .from("product_model_variants")
+      .select("brand,color_key,color_name,is_active,model,stock")
+      .eq("product_id", productId)
+      .order("brand", { ascending: true })
+      .order("model", { ascending: true });
+
+  if (modelVariantsError) {
+    throw new Error(
+      "No pudimos leer las variantes del producto para duplicarlo.",
+    );
+  }
+
+  const duplicatedModelVariants: ProductFormValues["modelVariants"] = (
+    originalModelVariants ?? []
+  ).map((variant) => ({
+    brand: variant.brand,
+    color_key: variant.color_key,
+    color_name: variant.color_name,
+    id: null,
+    is_active: variant.is_active,
+    model: variant.model,
+    stock: variant.stock,
+  }));
+  const duplicatedStock =
+    duplicatedModelVariants.length > 0
+      ? duplicatedModelVariants.reduce(
+          (total, variant) =>
+            variant.is_active ? total + variant.stock : total,
+          0,
+        )
+      : originalProduct.stock;
+
   const duplicatedSlug = await getUniqueDuplicatedSlug(originalProduct.slug);
   const productPayload: ProductInsert = {
     availability_type: originalProduct.availability_type,
@@ -766,19 +800,23 @@ export async function duplicateProduct(productId: string) {
     short_description: originalProduct.short_description,
     slug: duplicatedSlug,
     specifications: originalProduct.specifications,
-    stock: originalProduct.stock,
+    stock: duplicatedStock,
     storage_capacity: originalProduct.storage_capacity,
     technical_details: originalProduct.technical_details,
   };
-  const { data: duplicatedProduct, error: insertError } = await supabase
-    .from("products")
-    .insert(productPayload)
-    .select("id")
-    .single();
+  const { data: duplicatedProductId, error: insertError } = await supabase.rpc(
+    "create_product_with_model_variants",
+    {
+      model_variants_payload: getJsonModelVariants(duplicatedModelVariants),
+      product_payload: getJsonProductPayload(productPayload),
+    },
+  );
 
-  if (insertError) {
+  if (insertError || !duplicatedProductId) {
     throw new Error("No pudimos duplicar el producto.");
   }
+
+  const duplicatedProduct = { id: duplicatedProductId };
 
   const { data: images, error: imagesError } = await supabase
     .from("product_images")
